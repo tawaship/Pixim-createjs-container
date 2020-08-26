@@ -42,15 +42,20 @@
 								
 								container.addChild(new PIXI.Text('Library A'));
 								const a = container.addCreatejs(new $.vars.lib.A());
-								a.y = 100;
+								a.y = 50;
 								
-								container.addChild(new PIXI.Text('Library B')).y = 200;
+								container.addChild(new PIXI.Text('Library B')).y = 150;
 								const b = container.addCreatejs(new $.vars.lib.B());
-								b.y = 300;
+								b.y = 200;
 								
-								container.addChild(new PIXI.Text('Library C')).y = 400;
+								container.addChild(new PIXI.Text('Library C')).y = 300;
 								const c = container.addCreatejs(new $.vars.lib.C());
-								c.y = 500;
+								c.y = 350;
+								
+								container.addChild(new PIXI.Text('Library Root (50%)')).y = 500;
+								const r = container.addCreatejs(new $.vars.lib.game());
+								r.scaleX = r.scaleY = 0.5;
+								r.y = 550;
 							}
 						}
 					});
