@@ -1,5 +1,6 @@
 import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren } from '@tawaship/pixi-animate-core';
 import * as _Pixim from '@tawaship/pixim.js';
+import { CreatejsMovieClip } from './createjs/MovieClip';
 
 /**
  * @ignore
@@ -26,42 +27,35 @@ namespace Pixim {
 			private _lastCreatejsAnimID: number = 0;
 			
 			_addCreatejs(cjs) {
-				
-			}
-			
-			addCreatejs(cjs) {
-				if (cjs instanceof window.createjs.MovieClip) {
+				if (cjs instanceof CreatejsMovieClip) {
 					function handler(e) {
 						cjs.updateForPixi(e);
 					}
 					
-//					this.removeChild(cj);
+					const p = cjs.pixi.parent;
 					
-					this.task.on('createjsAnim', handler);
-					
-					this.once('removed', () => {
-						this.task.off('createjsAnim', handler);
+					cjs.pixi.once('added', () => {
+						if (cjs.pixi.parent !== p) {
+							cjs.gotoAndPlay(0);
+						}
+						
+						this.task.on('createjsAnim', handler);
+						cjs.pixi.once('removed', () => {
+							this.task.off('createjsAnim', handler);
+						});
 					});
 				}
-				
+			}
+			
+			addCreatejs(cjs) {
+				this._addCreatejs(cjs);
 				this.addChild(cjs.pixi);
 				
 				return cjs;
 			}
 			
 			addCreatejsAt(cjs, index) {
-				if (cjs instanceof window.createjs.MovieClip) {
-					function handler(e) {
-						cjs.updateForPixi(e);
-					}
-					
-					this.task.on('createjsAnim' ,handler);
-					
-					this.once('removed', () => {
-						this.task.off('createjsAnim', handler);
-					});
-				}
-				
+				this._addCreatejs(cjs);
 				this.addChildAt(cjs.pixi, index);
 				
 				return cjs;

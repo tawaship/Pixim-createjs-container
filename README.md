@@ -56,7 +56,7 @@ a.y = 100;
 
 ## Overrides
 
-- createjs.Movieclip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/classes/createjsmovieclip.html)
+- createjs.MovieClip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/docs/classes/pixim.animate.createjsmovieclip.html)
 
 ## Samples
 

@@ -977,29 +977,24 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                     superclass.apply(this, arguments), this._createjsAnimID = 0, this._lastCreatejsAnimID = 0;
                 }
                 return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
-                Container.prototype.constructor = Container, Container.prototype._addCreatejs = function(cjs) {}, 
-                Container.prototype.addCreatejs = function(cjs) {
+                Container.prototype.constructor = Container, Container.prototype._addCreatejs = function(cjs) {
                     var this$1 = this;
-                    if (cjs instanceof window.createjs.MovieClip) {
+                    if (cjs instanceof CreatejsMovieClip$1) {
                         function handler(e) {
                             cjs.updateForPixi(e);
                         }
-                        this.task.on("createjsAnim", handler), this.once("removed", (function() {
-                            this$1.task.off("createjsAnim", handler);
+                        var p = cjs.pixi.parent;
+                        cjs.pixi.once("added", (function() {
+                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0), this$1.task.on("createjsAnim", handler), 
+                            cjs.pixi.once("removed", (function() {
+                                this$1.task.off("createjsAnim", handler);
+                            }));
                         }));
                     }
-                    return this.addChild(cjs.pixi), cjs;
+                }, Container.prototype.addCreatejs = function(cjs) {
+                    return this._addCreatejs(cjs), this.addChild(cjs.pixi), cjs;
                 }, Container.prototype.addCreatejsAt = function(cjs, index) {
-                    var this$1 = this;
-                    if (cjs instanceof window.createjs.MovieClip) {
-                        function handler(e) {
-                            cjs.updateForPixi(e);
-                        }
-                        this.task.on("createjsAnim", handler), this.once("removed", (function() {
-                            this$1.task.off("createjsAnim", handler);
-                        }));
-                    }
-                    return this.addChildAt(cjs.pixi, index), cjs;
+                    return this._addCreatejs(cjs), this.addChildAt(cjs.pixi, index), cjs;
                 }, Container.prototype.removeCreatejs = function(cjs) {
                     return this.removeChild(cjs.pixi), cjs;
                 }, Container;
