@@ -1,6 +1,6 @@
-# Pixim-createjs-container
+# Pixim-animate-container
 
-"Pixim-createjs-container" is a plugin for using content published by Adobe Animate with "[Pixim.js](https://github.com/tawaship/Pixim.js)".
+"Pixim-animate-container" is a plugin for using content published by Adobe Animate with "[Pixim.js](https://github.com/tawaship/Pixim.js)".
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
@@ -19,7 +19,7 @@ I have not confirmed the operation on other versions.
 1. Install
 
 ```sh
-git clone https://github.com/tawaship/Pixim-createjs-container
+git clone https://github.com/tawaship/Pixim-animate-container
 ```
 
 <br>
@@ -28,15 +28,18 @@ git clone https://github.com/tawaship/Pixim-createjs-container
 <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 <script src="/path/to/lib/pixi.5.3.2.min.js"></script>
 <script src="/path/to/lib/Pixim.min.js"></script>
-<script src="/path/to/dist/Pixim-createjs-container.min.js"></script>
+<script src="/path/to/dist/Pixim-animate-container.min.js"></script>
 ```
 
 2. Prepare
 
 ```javascript
-Pixim.createjs.prepareAsync(
+Pixim.animate.prepareAsync(
 	'2FA8E0C7230941478CE2CA3DB82DBEDF', // "lib.properties.id" in Animate content.
-	'game/' // Directory path of Animate content.
+	'game/', // Directory path of Animate content.
+	{
+		useSynchedTimeline: true
+	}
 ).then(function(lib) {
 	// your code
 }):
@@ -45,11 +48,15 @@ Pixim.createjs.prepareAsync(
 3. Use
 
 ```javascript
-const container = this.addChild(new Pixim.createjs.Container());
+const container = this.addChild(new Pixim.animate.Container());
 
 const a = container.addCreatejs(new $.vars.lib.A());
 a.y = 100;
 ```
+
+## Overrides
+
+- createjs.Movieclip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/classes/createjsmovieclip.html)
 
 ## Samples
 

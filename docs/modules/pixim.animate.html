@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>createjs | Pixim-createjs-container - v1.0.0</title>
+	<title>animate | Pixim-createjs-container - v1.0.0</title>
 	<meta name="description" content="Documentation for Pixim-createjs-container - v1.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="pixim.html">Pixim</a>
 				</li>
 				<li>
-					<a href="pixim.createjs.html">createjs</a>
+					<a href="pixim.animate.html">animate</a>
 				</li>
 			</ul>
-			<h1>Namespace createjs</h1>
+			<h1>Namespace animate</h1>
 		</div>
 	</div>
 </header>
@@ -76,13 +76,13 @@
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-namespace"><a href="../classes/pixim.createjs.container.html" class="tsd-kind-icon">Container</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-namespace"><a href="../classes/pixim.animate.container.html" class="tsd-kind-icon">Container</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="pixim.createjs.html#prepareasync" class="tsd-kind-icon">prepare<wbr>Async</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="pixim.animate.html#prepareasync" class="tsd-kind-icon">prepare<wbr>Async</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,16 +94,19 @@
 					<a name="prepareasync" class="tsd-anchor"></a>
 					<h3>prepare<wbr>Async</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
-						<li class="tsd-signature tsd-kind-icon">prepare<wbr>Async<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, basepath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TCreatejsLibrary</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepare<wbr>Async<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, basepath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TPlayerOption</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TAnimateLibrary</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/Container.ts:16</li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/Container.ts#L17">src/Container.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Prepare createjs content published with Adobe Animate.</p>
+								</div>
 								<dl class="tsd-comment-tags">
 									<dt>async</dt>
 									<dd></dd>
@@ -123,8 +126,11 @@
 										<p>Directory path of Animate content.</p>
 									</div>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">TPlayerOption</span><span class="tsd-signature-symbol"> = {}</span></h5>
+								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TCreatejsLibrary</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TAnimateLibrary</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -140,17 +146,17 @@
 						<a href="pixim.html">Pixim</a>
 					</li>
 					<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
-						<a href="pixim.createjs.html">Pixim.createjs</a>
+						<a href="pixim.animate.html">Pixim.animate</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="../classes/pixim.createjs.container.html" class="tsd-kind-icon">Container</a>
+						<a href="../classes/pixim.animate.container.html" class="tsd-kind-icon">Container</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
-						<a href="pixim.createjs.html#prepareasync" class="tsd-kind-icon">prepare<wbr>Async</a>
+						<a href="pixim.animate.html#prepareasync" class="tsd-kind-icon">prepare<wbr>Async</a>
 					</li>
 				</ul>
 			</nav>
@@ -161,6 +167,9 @@
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
 		</div>
 	</div>
 </footer>

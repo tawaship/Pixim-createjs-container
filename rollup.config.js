@@ -12,7 +12,7 @@ const pixim = conf.dependencies['@tawaship/pixim.js'].replace('^', '');
 
 const banner = [
 	'/*!',
-	` * @tawaship/pixim-createjs-container.js - v${version}`,
+	` * @tawaship/pixim-animate-container.js - v${version}`,
 	' * ',
 	` * @require pixi.js v${pixi}`,
 	` * @require @tawaship/pixim.js v${pixim}`,
@@ -33,9 +33,9 @@ export default (async () => {
 			output: [
 				{
 					banner,
-					file: 'dist/Pixim-createjs-container.js',
+					file: 'dist/Pixim-animate-container.js',
 					format: 'iife',
-					name: 'Pixim.createjs',
+					name: 'Pixim.animate',
 					sourcemap: true,
 					extend: true,
 					globals: {
@@ -68,9 +68,9 @@ export default (async () => {
 			output: [
 				{
 					banner,
-					file: 'dist/Pixim-createjs-container.min.js',
+					file: 'dist/Pixim-animate-container.min.js',
 					format: 'iife',
-					name: 'Pixim.createjs',
+					name: 'Pixim.animate',
 					sourcemap: true,
 					extend: true,
 					globals: {
