@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<script>
-			Pixim.animate.prepareAsync('2FA8E0C7230941478CE2CA3DB82DBEDF', 'game/')
+			Pixim.animate.prepareAsync('2FA8E0C7230941478CE2CA3DB82DBEDF', 'game/', { useSynchedTimeline: true })
 				.then(function(lib) {
 					const pRatio = window.devicePixelRatio || 1;
 					const app = new Pixim.Application({
@@ -57,13 +57,13 @@
 								const r = container.addCreatejs(new $.vars.lib.game());
 								r.y = 550;
 								
-								container.addChild(new PIXI.Text('Animation use Library G_A (Graphics)')).y = 900;
+								container.addChild(new PIXI.Text('Animation using library G_A (Graphics)')).y = 1000;
 								const ga = container.addCreatejs(new $.vars.lib.G_A());
 								
 								container.task.on('rot', e => {
 									ga.rotation += e.delta;
 								});
-								ga.x = 100, ga.y = 1000;
+								ga.x = 100, ga.y = 1100;
 							}
 						}
 					});

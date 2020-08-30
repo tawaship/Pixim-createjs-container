@@ -71,27 +71,27 @@ p.nominalBounds = new cjs.Rectangle(-6.5,-15.2,515,59.400000000000006);
 	this.instance = new lib.G_A("synched",0);
 	this.instance.setTransform(14.5,14.5,1,1,0,0,0,14.5,14.5);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).to({x:496.5},59).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance).to({rotation:-360,x:496.5},59).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,524,42);
+p.nominalBounds = new cjs.Rectangle(-6.5,-12.5,524,54.1);
 
 
 (lib.C = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.A();
+	this.instance = new lib.A("synched",0);
 	this.instance.setTransform(14.5,14.5,1,1,0,0,0,14.5,14.5);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).to({y:94.5},29).to({y:14.5},30).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance).to({y:94.5,startPosition:29},29).to({y:14.5,startPosition:59},30).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,42,122);
+p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,524,122.8);
 
 
 // stage content:
