@@ -28,6 +28,7 @@ git clone https://github.com/tawaship/Pixim-animate-container
 <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 <script src="/path/to/lib/pixi.5.3.2.min.js"></script>
 <script src="/path/to/dist/pixi-animate-container.min.js"></script>
+<script src="[your content]"></script>
 ```
 
 2. Use
