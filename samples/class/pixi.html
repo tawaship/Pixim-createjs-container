@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no, minimal-ui">
+		<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+		<script src="../../lib/pixi.5.3.2.min.js"></script>
+		<script src="../../dist/pixi-animate-container.js"></script>
+		<script src="game/game.js"></script>
+	</head>
+	<body>
+		<script>
+			PIXI.animate.prepareAsync('2FA8E0C7230941478CE2CA3DB82DBEDF', 'game/', { useSynchedTimeline: true })
+				.then(function(lib) {
+					const pRatio = window.devicePixelRatio || 1;
+					const app = new PIXI.Application({
+						width: 450,
+						height: 800,
+						antialias: true,
+						resolution: pRatio,
+						backgroundColor: parseInt(lib.properties.color.slice(1), 16)
+					});
+					
+					class Root extends PIXI.Container {
+						constructor() {
+							super();
+							
+							this.x = 10;
+							this.y = 10;
+							
+							this.scale.set(0.5);
+							
+							const container = this.addChild(new PIXI.animate.Container(app.ticker));
+							const container2 = this.addChild(new PIXI.animate.Container(app.ticker));
+							container.addChild(new PIXI.Text('Library A'));
+							const a = container.addCreatejs(new lib.A());
+							a.y = 50;
+							
+							container.addChild(new PIXI.Text('Library B')).y = 150;
+							const b = container.addCreatejs(new lib.B());
+							b.y = 200;
+							
+							container.addChild(new PIXI.Text('Library C')).y = 300;
+							const c = container.addCreatejs(new lib.C());
+							c.y = 350;
+							
+							container.addChild(new PIXI.Text('Library Root')).y = 500;
+							const r = container.addCreatejs(new lib.game());
+							r.y = 550;
+							
+							container.addChild(new PIXI.Text('Animation using library G_A (Graphics)')).y = 1000;
+							const ga = container.addCreatejs(new lib.G_A());
+							
+							app.ticker.add(delta => {
+								ga.rotation += delta;
+							});
+							ga.x = 100, ga.y = 1100;
+						}
+					}
+					
+					app.stage.addChild(new Root());
+					document.body.appendChild(app.view);
+				});
+		</script>
+	</div>
+	</body>
+</html>

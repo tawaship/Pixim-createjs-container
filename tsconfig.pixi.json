@@ -1,0 +1,16 @@
+{
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "target": "ES6"
+  },
+  "typedocOptions": {
+    "mode": "file",
+    "readme": "docs/README.pixi.md",
+    "name": "pixi-animate-container",
+    "out": "docs/pixi/",
+    "moduleResolution": "node",
+    "gitRevision": "master",
+    "includeVersion": true
+  },
+  "exclude": ["node_modules", "src/**/*.d.ts"]
+}

@@ -6,7 +6,7 @@
  * @author tawaship (makazu.mori@gmail.com)
  * @license MIT
  */
-this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
+this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
     "use strict";
     /*!
      * @tawaship/pixi-animate-core - v1.0.10
@@ -307,7 +307,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         return prototypeAccessors.createjs.get = function() {
             return this._createjs;
         }, Object.defineProperties(PixiMovieClip.prototype, prototypeAccessors), PixiMovieClip;
-    }(pixi_js.Container);
+    }(_PIXI.Container);
     function createMovieClipPixiData(cjs) {
         var pixi = new PixiMovieClip(cjs);
         return Object.assign(createPixiData(pixi.pivot), {
@@ -413,7 +413,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         return prototypeAccessors$2.createjs.get = function() {
             return this._createjs;
         }, Object.defineProperties(PixiSprite.prototype, prototypeAccessors$2), PixiSprite;
-    }(pixi_js.Sprite);
+    }(_PIXI.Sprite);
     function createSpritePixiData(cjs) {
         var pixi = new PixiSprite(cjs);
         return Object.assign(createPixiData(pixi.anchor), {
@@ -465,7 +465,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
             }, this._pixiData = createSpritePixiData(this), superclass.prototype.initialize.apply(this, arguments);
         }, CreatejsSprite.prototype.gotoAndStop = function() {
             superclass.prototype.gotoAndStop.apply(this, arguments);
-            var frame = this.spriteSheet.getFrame(this.currentFrame), baseTexture = pixi_js.BaseTexture.from(frame.image), texture = new pixi_js.Texture(baseTexture, frame.rect);
+            var frame = this.spriteSheet.getFrame(this.currentFrame), baseTexture = _PIXI.BaseTexture.from(frame.image), texture = new _PIXI.Texture(baseTexture, frame.rect);
             this._pixiData.instance.texture = texture;
         }, prototypeAccessors$3.pixi.get = function() {
             return this._pixiData.instance;
@@ -512,7 +512,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         return prototypeAccessors$4.createjs.get = function() {
             return this._createjs;
         }, Object.defineProperties(PixiShape.prototype, prototypeAccessors$4), PixiShape;
-    }(pixi_js.Container);
+    }(_PIXI.Container);
     function createShapePixiData(cjs) {
         var pixi = new PixiShape(cjs);
         return Object.assign(createPixiData(pixi.pivot), {
@@ -609,7 +609,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         return prototypeAccessors$6.createjs.get = function() {
             return this._createjs;
         }, Object.defineProperties(PixiBitmap.prototype, prototypeAccessors$6), PixiBitmap;
-    }(pixi_js.Sprite);
+    }(_PIXI.Sprite);
     function createBitmapPixiData(cjs) {
         var pixi = new PixiBitmap(cjs);
         return Object.assign(createPixiData(pixi.anchor), {
@@ -644,7 +644,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                 mask: null,
                 filters: null
             }, this._pixiData = createBitmapPixiData(this);
-            var res = superclass.prototype.initialize.apply(this, arguments), texture = pixi_js.Texture.from(this.image);
+            var res = superclass.prototype.initialize.apply(this, arguments), texture = _PIXI.Texture.from(this.image);
             return this._pixiData.instance.texture = texture, res;
         }, prototypeAccessors$7.pixi.get = function() {
             return this._pixiData.instance;
@@ -691,7 +691,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         return prototypeAccessors$8.createjs.get = function() {
             return this._createjs;
         }, Object.defineProperties(PixiGraphics.prototype, prototypeAccessors$8), PixiGraphics;
-    }(pixi_js.Graphics);
+    }(_PIXI.Graphics);
     function createGraphicsPixiData(cjs) {
         var pixi = new PixiGraphics(cjs);
         return Object.assign(createPixiData(pixi.pivot), {
@@ -701,13 +701,13 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         });
     }
     var LineCap = {
-        0: pixi_js.LINE_CAP.BUTT,
-        1: pixi_js.LINE_CAP.ROUND,
-        2: pixi_js.LINE_CAP.SQUARE
+        0: _PIXI.LINE_CAP.BUTT,
+        1: _PIXI.LINE_CAP.ROUND,
+        2: _PIXI.LINE_CAP.SQUARE
     }, LineJoin = {
-        0: pixi_js.LINE_JOIN.MITER,
-        1: pixi_js.LINE_JOIN.ROUND,
-        2: pixi_js.LINE_JOIN.BEVEL
+        0: _PIXI.LINE_JOIN.MITER,
+        1: _PIXI.LINE_JOIN.ROUND,
+        2: _PIXI.LINE_JOIN.BEVEL
     }, DEG_TO_RAD$1 = Math.PI / 180, CreatejsGraphicsTemp = window.createjs.Graphics, CreatejsGraphics = function(superclass) {
         function CreatejsGraphics() {
             superclass.apply(this, arguments), this._originParams = {
@@ -897,7 +897,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         }
         return Text && (PixiText.__proto__ = Text), PixiText.prototype = Object.create(Text && Text.prototype), 
         PixiText.prototype.constructor = PixiText, PixiText;
-    }(pixi_js.Text), PixiTextContainer = function(Container) {
+    }(_PIXI.Text), PixiTextContainer = function(Container) {
         function PixiTextContainer(cjs, text) {
             Container.call(this), this._createjs = cjs, this._text = text;
         }
@@ -917,7 +917,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
             return this._text;
         }, Object.defineProperties(PixiTextContainer.prototype, prototypeAccessors$10), 
         PixiTextContainer;
-    }(pixi_js.Container);
+    }(_PIXI.Container);
     function createTextOriginParam(text, font, color) {
         return Object.assign({
             x: 0,
@@ -1076,7 +1076,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         return superclass && (CreatejsButtonHelper.__proto__ = superclass), CreatejsButtonHelper.prototype = Object.create(superclass && superclass.prototype), 
         CreatejsButtonHelper.prototype.constructor = CreatejsButtonHelper, CreatejsButtonHelper;
     }(window.createjs.ButtonHelper);
-    var Pixim, CreatejsMovieClip$1 = function(MovieClip) {
+    var PIXI$1, CreatejsMovieClip$1 = function(MovieClip) {
         function CreatejsMovieClip() {
             MovieClip.apply(this, arguments);
         }
@@ -1085,7 +1085,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
             return this.advance(e.delta), MovieClip.prototype.updateForPixi.call(this, e);
         }, CreatejsMovieClip;
     }(CreatejsMovieClip);
-    !function(Pixim) {
+    !function(PIXI) {
         !function(animate) {
             animate.prepareAsync = function(id, basepath, options) {
                 return void 0 === options && (options = {}), function(id, basepath, options) {
@@ -1130,8 +1130,8 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                 }(id, basepath, options);
             };
             var Container = function(superclass) {
-                function Container() {
-                    superclass.apply(this, arguments), this._createjsAnimID = 0, this._lastCreatejsAnimID = 0;
+                function Container(ticker) {
+                    superclass.call(this), this._createjsAnimID = 0, this._lastCreatejsAnimID = 0, this._ticker = ticker;
                 }
                 return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
                 Container.prototype.constructor = Container, Container.prototype._addCreatejs = function(cjs) {
@@ -1142,9 +1142,8 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                         }
                         var p = cjs.pixi.parent;
                         cjs.pixi.once("added", (function() {
-                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0), this$1.task.on("createjsAnim", handler), 
-                            cjs.pixi.once("removed", (function() {
-                                this$1.task.off("createjsAnim", handler);
+                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0), this$1._ticker.add(handler), cjs.pixi.once("removed", (function() {
+                                this$1._ticker.remove(handler);
                             }));
                         }));
                     }
@@ -1155,11 +1154,11 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                 }, Container.prototype.removeCreatejs = function(cjs) {
                     return this.removeChild(cjs.pixi), cjs;
                 }, Container;
-            }(_Pixim.Container);
+            }(_PIXI.Container);
             animate.Container = Container;
-        }(Pixim.animate || (Pixim.animate = {}));
-    }(Pixim || (Pixim = {}));
-    var prepareAsync = Pixim.animate.prepareAsync, Container = Pixim.animate.Container;
+        }(PIXI.animate || (PIXI.animate = {}));
+    }(PIXI$1 || (PIXI$1 = {}));
+    var prepareAsync = PIXI$1.animate.prepareAsync, Container = PIXI$1.animate.Container;
     !function(obj) {
         for (var i in void 0 === obj && (obj = {}), window.createjs.StageGL = CreatejsStageGL, 
         window.createjs.MovieClip = CreatejsMovieClip, window.createjs.Sprite = CreatejsSprite, 
@@ -1172,5 +1171,5 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         MovieClip: CreatejsMovieClip$1
     }), exports.Container = Container, exports.CreatejsMovieClip = CreatejsMovieClip$1, 
     exports.prepareAsync = prepareAsync;
-}(this.Pixim.animate = this.Pixim.animate || {}, PIXI, Pixim);
-//# sourceMappingURL=Pixim-animate-container.js.map
+}(this.PIXI.animate = this.PIXI.animate || {}, PIXI);
+//# sourceMappingURL=pixi-animate-container.js.map

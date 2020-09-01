@@ -29,35 +29,59 @@ git clone https://github.com/tawaship/Pixim-animate-container
 <script src="/path/to/lib/pixi.5.3.2.min.js"></script>
 <script src="/path/to/lib/Pixim.min.js"></script>
 <script src="/path/to/dist/Pixim-animate-container.min.js"></script>
+<script src="[your content]"></script>
 ```
 
-2. Prepare
+2. Use
 
 ```javascript
 Pixim.animate.prepareAsync(
-	'2FA8E0C7230941478CE2CA3DB82DBEDF', // "lib.properties.id" in Animate content.
-	'game/', // Directory path of Animate content.
+	"[conposition id]", // "lib.properties.id" in Animate content.
+	"[content directory path]", // Directory path of Animate content.
 	{
 		useSynchedTimeline: true
 	}
-).then(function(lib) {
-	// your code
-}):
-```
-
-3. Use
-
-```javascript
-const container = this.addChild(new Pixim.animate.Container());
-
-const a = container.addCreatejs(new $.vars.lib.A());
-a.y = 100;
+.then(function(lib) {
+	const app = new Pixim.Application();
+	
+	const Game = Pixim.Content.create();
+	
+	Game.setConfig({
+		width: 450,
+		height: 800
+	});
+	
+	Game.defineLibraries({
+		root: class Root extends PIXI.Container {
+			constructor($) {
+				super();
+				
+				const container = this.addChild(new Pixim.animate.Container());
+				
+				const cls = $.vars.lib.game; // The class you want to use.
+				container.addCreatejs(new cls());
+			}
+		}
+	});
+	
+	const game = new Game();
+	game.addVars({
+		lib: lib
+	});
+	
+	app
+		.fullScreen()
+		.attachAsync(game)
+		.then(function() {
+			app.play();
+		});
+});
 ```
 
 ## Overrides
 
-- createjs.MovieClip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/docs/classes/pixim.animate.createjsmovieclip.html)
+- createjs.MovieClip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)
 
 ## Samples
 
-[github](https://tawaship.github.io/Pixim-createjs-container/samples/)
+[github](https://tawaship.github.io/Pixim-animate-container/samples/)

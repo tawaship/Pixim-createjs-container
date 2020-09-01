@@ -1,6 +1,6 @@
 import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren } from '@tawaship/pixi-animate-core';
 import * as _Pixim from '@tawaship/pixim.js';
-import { CreatejsMovieClip } from './createjs/MovieClip';
+import { CreatejsMovieClip } from '../createjs/MovieClip';
 
 /**
  * @ignore

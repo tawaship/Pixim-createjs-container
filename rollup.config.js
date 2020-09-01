@@ -10,9 +10,20 @@ const version = conf.version;
 const pixi = conf.dependencies['pixi.js'].replace('^', '');
 const pixim = conf.dependencies['@tawaship/pixim.js'].replace('^', '');
 
-const banner = [
+const pixi_banner = [
 	'/*!',
-	` * @tawaship/pixim-animate-container.js - v${version}`,
+	` * pixi-animate-container - v${version}`,
+	' * ',
+	` * @require pixi.js v${pixi}`,
+	' * @author tawaship (makazu.mori@gmail.com)',
+	' * @license MIT',
+	' */',
+	''
+].join('\n');
+
+const pixim_banner = [
+	'/*!',
+	` * Pixim-animate-container - v${version}`,
 	' * ',
 	` * @require pixi.js v${pixi}`,
 	` * @require @tawaship/pixim.js v${pixim}`,
@@ -24,15 +35,15 @@ const banner = [
 
 export default (async () => {
 	if (process.env.PROD) {
-		await del(['./docs/', './dist/']);
+		await del(['./docs/pixi/', './docs/pixim/', './dist/']);
 	}
 	
 	return [
 		{
-			input: 'src/index.ts',
+			input: 'src/pixim/index.ts',
 			output: [
 				{
-					banner,
+					banner: pixim_banner,
 					file: 'dist/Pixim-animate-container.js',
 					format: 'iife',
 					name: 'Pixim.animate',
@@ -48,7 +59,7 @@ export default (async () => {
 			plugins: [
 				nodeResolve(),
 				commonjs(),
-				typescript(),
+				typescript({tsconfig: 'tsconfig.pixim.json'}),
 				buble(),
 				terser({
 					compress: {
@@ -64,10 +75,10 @@ export default (async () => {
 			]
 		},
 		{
-			input: 'src/index.ts',
+			input: 'src/pixim/index.ts',
 			output: [
 				{
-					banner,
+					banner: pixim_banner,
 					file: 'dist/Pixim-animate-container.min.js',
 					format: 'iife',
 					name: 'Pixim.animate',
@@ -84,7 +95,71 @@ export default (async () => {
 			plugins: [
 				nodeResolve(),
 				commonjs(),
-				typescript(),
+				typescript({tsconfig: 'tsconfig.pixim.json'}),
+				buble(),
+				terser({
+					compress: {
+						//drop_console: true,
+						pure_funcs: ['console.log']
+					}
+				})
+			]
+		},
+		{
+			input: 'src/pixi/index.ts',
+			output: [
+				{
+					banner: pixim_banner,
+					file: 'dist/pixi-animate-container.js',
+					format: 'iife',
+					name: 'PIXI.animate',
+					sourcemap: true,
+					extend: true,
+					globals: {
+						'pixi.js': 'PIXI'
+					}
+				}
+			],
+			external: ['pixi.js'],
+			plugins: [
+				nodeResolve(),
+				commonjs(),
+				typescript({tsconfig: 'tsconfig.pixi.json'}),
+				buble(),
+				terser({
+					compress: {
+						//drop_console: true
+						//pure_funcs: ['console.log']
+					},
+					mangle: false,
+					output: {
+						beautify: true,
+						braces: true
+					}
+				})
+			]
+		},
+		{
+			input: 'src/pixi/index.ts',
+			output: [
+				{
+					banner: pixim_banner,
+					file: 'dist/pixi-animate-container.min.js',
+					format: 'iife',
+					name: 'PIXI.animate',
+					sourcemap: true,
+					extend: true,
+					globals: {
+						'pixi.js': 'PIXI'
+					},
+					compact: true
+				}
+			],
+			external: ['pixi.js'],
+			plugins: [
+				nodeResolve(),
+				commonjs(),
+				typescript({tsconfig: 'tsconfig.pixi.json'}),
 				buble(),
 				terser({
 					compress: {
