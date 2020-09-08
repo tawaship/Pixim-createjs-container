@@ -6,6 +6,9 @@
 
 ---
 
+## Core module
+[pixi-animate-core](https://tawaship.github.io/pixi-animate-core/)
+
 ## Support version
 
 - A complete set of content published with Adobe Animate version 20.02

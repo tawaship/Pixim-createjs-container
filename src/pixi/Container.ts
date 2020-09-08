@@ -1,4 +1,4 @@
-import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren } from '@tawaship/pixi-animate-core';
+import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren, TAnimateLibrary } from '@tawaship/pixi-animate-core';
 import * as _PIXI from 'pixi.js';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
@@ -14,9 +14,15 @@ namespace PIXI {
 		 * @async
 		 * @param id "lib.properties.id" in Animate content.
 		 * @param basepath Directory path of Animate content.
+		 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tplayeroption
 		 */
 		export function prepareAsync(id: string, basepath: string, options: TPlayerOption = {}) {
-			return prepareAnimateAsync(id, basepath, options);
+			return prepareAnimateAsync(id, basepath, options)
+				.then((lib: TAnimateLibrary) => {
+					CreatejsMovieClip.framerate = lib.properties.fps;
+					
+					return lib;
+				});
 		}
 		
 		/**
@@ -35,8 +41,8 @@ namespace PIXI {
 			
 			_addCreatejs(cjs) {
 				if (cjs instanceof CreatejsMovieClip) {
-					function handler(e) {
-						cjs.updateForPixi(e);
+					function handler(delta) {
+						cjs.updateForPixi({ delta: delta });
 					}
 					
 					const p = cjs.pixi.parent;

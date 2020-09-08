@@ -12,6 +12,8 @@
 		<script>
 			PIXI.animate.prepareAsync('2FA8E0C7230941478CE2CA3DB82DBEDF', 'game/', { useSynchedTimeline: true })
 				.then(function(lib) {
+					window.createjs.MovieClip.framerate = lib.properties.fps;
+					
 					const pRatio = window.devicePixelRatio || 1;
 					const app = new PIXI.Application({
 						width: 450,

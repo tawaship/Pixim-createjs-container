@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CreatejsMovieClip | pixi-animate-container - v1.0.1</title>
-	<meta name="description" content="Documentation for pixi-animate-container - v1.0.1">
+	<title>CreatejsMovieClip | pixi-animate-container - v1.0.4</title>
+	<meta name="description" content="Documentation for pixi-animate-container - v1.0.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">pixi-animate-container - v1.0.1</a>
+					<a href="../index.html" class="title">pixi-animate-container - v1.0.4</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -66,6 +66,15 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p><a href="https://tawaship.github.io/pixi-animate-core/classes/createjsmovieclip.html">https://tawaship.github.io/pixi-animate-core/classes/createjsmovieclip.html</a></p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -89,15 +98,26 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="createjsmovieclip.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="createjsmovieclip.html#_originparams" class="tsd-kind-icon">_origin<wbr>Params</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="createjsmovieclip.html#_pixidata" class="tsd-kind-icon">_pixi<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="createjsmovieclip.html#_pixiframerate" class="tsd-kind-icon">_pixi<wbr>Framerate</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="createjsmovieclip.html#framerate" class="tsd-kind-icon">framerate</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="createjsmovieclip.html#pixi" class="tsd-kind-icon">pixi</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-static"><a href="createjsmovieclip.html#framerate-1" class="tsd-kind-icon">framerate</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="createjsmovieclip.html#_initforpixi" class="tsd-kind-icon">_init<wbr>For<wbr>Pixi</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="createjsmovieclip.html#addchild" class="tsd-kind-icon">add<wbr>Child</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="createjsmovieclip.html#addchildat" class="tsd-kind-icon">add<wbr>Child<wbr>At</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="createjsmovieclip.html#initialize" class="tsd-kind-icon">initialize</a></li>
@@ -116,23 +136,108 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Createjs<wbr>Movie<wbr>Clip<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="createjsmovieclip.html" class="tsd-signature-type">CreatejsMovieClip</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Createjs<wbr>Movie<wbr>Clip<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="createjsmovieclip.html" class="tsd-signature-type">CreatejsMovieClip</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:21</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:31</li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="createjsmovieclip.html" class="tsd-signature-type">CreatejsMovieClip</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+					<a name="_originparams" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _origin<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">_origin<wbr>Params<span class="tsd-signature-symbol">:</span> <a href="../globals.html#tmoviecliporiginparam" class="tsd-signature-type">TMovieClipOriginParam</a></div>
+					<aside class="tsd-sources">
+						<p>Overrides CreatejsMovieClip._originParams</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L22">src/createjs/MovieClip.ts:22</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="_pixidata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _pixi<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">_pixi<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TMovieClipPixiData</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#_pixidata">_pixiData</a></p>
+						<ul>
+							<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:31</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="_pixiframerate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _pixi<wbr>Framerate</h3>
+					<div class="tsd-signature tsd-kind-icon">_pixi<wbr>Framerate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 60</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L55">src/createjs/MovieClip.ts:55</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="framerate" class="tsd-anchor"></a>
+					<h3>framerate</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> framerate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> framerate<span class="tsd-signature-symbol">(</span>framerate<span class="tsd-signature-symbol">: </span><a href="../globals.html#tframerate" class="tsd-signature-type">TFramerate</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L43">src/createjs/MovieClip.ts:43</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes the framerate.
+									If you enter a value that can be regarded as &quot;false&quot;, the current value of CreatejsMovieClip.framerate will be set.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L51">src/createjs/MovieClip.ts:51</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes the framerate.
+									If you enter a value that can be regarded as &quot;false&quot;, the current value of CreatejsMovieClip.framerate will be set.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>framerate: <a href="../globals.html#tframerate" class="tsd-signature-type">TFramerate</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 					<a name="pixi" class="tsd-anchor"></a>
 					<h3>pixi</h3>
@@ -144,16 +249,84 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#pixi">pixi</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:29</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:43</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PixiMovieClip</span></h4>
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-static">
+					<a name="framerate-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> framerate</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> framerate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> framerate<span class="tsd-signature-symbol">(</span>framerate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L57">src/createjs/MovieClip.ts:57</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes the default framerate of movie clips generated after execution.
+									However, if the framerate is set individually, the individual setting has priority.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L65">src/createjs/MovieClip.ts:65</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes the default framerate of movie clips generated after execution.
+									However, if the framerate is set individually, the individual setting has priority.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>framerate: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+					<a name="_initforpixi" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _init<wbr>For<wbr>Pixi</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_init<wbr>For<wbr>Pixi<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides CreatejsMovieClip._initForPixi</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L37">src/createjs/MovieClip.ts:37</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>override</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="addchild" class="tsd-anchor"></a>
 					<h3>add<wbr>Child</h3>
@@ -165,7 +338,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#addchild">addChild</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:24</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:38</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -189,7 +362,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#addchildat">addChildAt</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:25</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:39</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -209,16 +382,22 @@
 					<a name="initialize" class="tsd-anchor"></a>
 					<h3>initialize</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">initialize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">initialize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#initialize">initialize</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:23</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:37</li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
@@ -234,7 +413,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#removeallchldren">removeAllChldren</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:28</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:42</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -252,7 +431,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#removechild">removeChild</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:26</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:40</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -276,7 +455,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="createjsmovieclip.html">CreatejsMovieClip</a>.<a href="createjsmovieclip.html#removechildat">removeChildAt</a></p>
 								<ul>
-									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:27</li>
+									<li>Defined in node_modules/@tawaship/pixi-animate-core/types/createjs/MovieClip.d.ts:41</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -300,9 +479,18 @@
 							<aside class="tsd-sources">
 								<p>Overrides CreatejsMovieClip.updateForPixi</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L4">src/createjs/MovieClip.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-createjs-container/blob/master/src/createjs/MovieClip.ts#L28">src/createjs/MovieClip.ts:28</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>override</dt>
+									<dd></dd>
+									<dt>see</dt>
+									<dd><p><a href="https://tawaship.github.io/pixi-animate-core/globals.html#ttickerdata">https://tawaship.github.io/pixi-animate-core/globals.html#ttickerdata</a></p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -333,8 +521,26 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 								<a href="createjsmovieclip.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+								<a href="createjsmovieclip.html#_originparams" class="tsd-kind-icon">_origin<wbr>Params</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="createjsmovieclip.html#_pixidata" class="tsd-kind-icon">_pixi<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="createjsmovieclip.html#_pixiframerate" class="tsd-kind-icon">_pixi<wbr>Framerate</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="createjsmovieclip.html#framerate" class="tsd-kind-icon">framerate</a>
+							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="createjsmovieclip.html#pixi" class="tsd-kind-icon">pixi</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-static">
+								<a href="createjsmovieclip.html#framerate-1" class="tsd-kind-icon">framerate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+								<a href="createjsmovieclip.html#_initforpixi" class="tsd-kind-icon">_init<wbr>For<wbr>Pixi</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="createjsmovieclip.html#addchild" class="tsd-kind-icon">add<wbr>Child</a>
@@ -361,6 +567,12 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-type-alias tsd-is-private">
+						<a href="../globals.html#tframerate" class="tsd-kind-icon">TFramerate</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#tmoviecliporiginparam" class="tsd-kind-icon">TMovie<wbr>Clip<wbr>Origin<wbr>Param</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -371,11 +583,16 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 		</div>
 	</div>

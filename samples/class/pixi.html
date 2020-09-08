@@ -31,30 +31,62 @@
 							this.scale.set(0.5);
 							
 							const container = this.addChild(new PIXI.animate.Container(app.ticker));
-							const container2 = this.addChild(new PIXI.animate.Container(app.ticker));
-							container.addChild(new PIXI.Text('Library A'));
-							const a = container.addCreatejs(new lib.A());
-							a.y = 50;
 							
-							container.addChild(new PIXI.Text('Library B')).y = 150;
-							const b = container.addCreatejs(new lib.B());
-							b.y = 200;
+							this.addChild(new Block('Library A', lib.A));
 							
-							container.addChild(new PIXI.Text('Library C')).y = 300;
-							const c = container.addCreatejs(new lib.C());
-							c.y = 350;
+							this.addChild(new Block('Library B', lib.B)).y = 150;
 							
-							container.addChild(new PIXI.Text('Library Root')).y = 500;
-							const r = container.addCreatejs(new lib.game());
-							r.y = 550;
+							this.addChild(new Block('Library C', lib.C)).y = 300;
 							
-							container.addChild(new PIXI.Text('Animation using library G_A (Graphics)')).y = 1000;
+							this.addChild(new Block('Library Root', lib.game)).y = 500;
+							
+							this.addChild(new PIXI.Text('Animation using library G_A (Graphics)')).y = 1000;
 							const ga = container.addCreatejs(new lib.G_A());
 							
 							app.ticker.add(delta => {
 								ga.rotation += delta;
 							});
 							ga.x = 100, ga.y = 1100;
+						}
+					}
+					
+					class Block extends PIXI.animate.Container {
+						constructor(title, lib) {
+							super(app.ticker);
+							
+							this.addChild(new PIXI.Text(title));
+							const a = this.addCreatejs(new lib());
+							a.y = 50;
+							this.a = a;
+							
+							const ab = this.addChild(new Bt(() => {
+								this.addCreatejs(a);
+							}, 'add'));
+							ab.x = 200;
+							
+							const ab2 = this.addChild(new Bt(() => {
+								this.removeCreatejs(a);
+							}, 'remove'));
+							ab2.x = 400;
+						}
+					}
+					
+					class Bt extends PIXI.Container {
+						constructor(fn, title) {
+							super();
+							
+							const ab = this.addChild(new PIXI.Graphics())
+								.lineStyle(1, 0, 1)
+								.beginFill(0xEEEEEE)
+								.drawRect(0, 0, 100, 50);
+								
+							const at = ab.addChild(new PIXI.Text(title, { fill: 0 }));
+							at.x = ab.width / 2 - at.width / 2;
+							at.y = ab.height / 2 - at.height / 2;
+							ab.x = 200;
+							ab.interactive = true;
+							ab.cursor = 'pointer'
+							ab.on('pointerdown', fn);
 						}
 					}
 					
