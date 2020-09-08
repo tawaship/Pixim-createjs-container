@@ -85,6 +85,10 @@ Pixim.animate.prepareAsync(
 
 - createjs.MovieClip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)
 
-## Samples
+## Links
 
-[github](https://tawaship.github.io/Pixim-animate-container/samples/)
+[github](https://github.com/tawaship/Pixim-animate-container)
+
+[documents](https://tawaship.github.io/Pixim-animate-container/docs/)
+
+[samples](https://tawaship.github.io/Pixim-animate-container/samples/)
