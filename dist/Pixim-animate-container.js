@@ -1111,29 +1111,20 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         }
         _CreatejsMovieClip && (CreatejsMovieClip.__proto__ = _CreatejsMovieClip), CreatejsMovieClip.prototype = Object.create(_CreatejsMovieClip && _CreatejsMovieClip.prototype), 
         CreatejsMovieClip.prototype.constructor = CreatejsMovieClip;
-        var prototypeAccessors = {
-            framerate: {
-                configurable: !0
-            }
-        }, staticAccessors = {
+        var staticAccessors = {
             framerate: {
                 configurable: !0
             }
         };
         return CreatejsMovieClip.prototype.updateForPixi = function(e) {
-            return this.advance(e.delta * (1e3 / 60)), _CreatejsMovieClip.prototype.updateForPixi.call(this, e);
-        }, CreatejsMovieClip.prototype._initForPixi = function() {
-            _CreatejsMovieClip.prototype._initForPixi.call(this), this._originParams.framerate = null;
-        }, prototypeAccessors.framerate.get = function() {
-            return this._originParams.framerate;
-        }, prototypeAccessors.framerate.set = function(framerate) {
-            this._originParams.framerate = framerate || CreatejsMovieClip._pixiFramerate;
+            var f = this.framerate;
+            return this.framerate = f || CreatejsMovieClip._pixiFramerate, this.advance(e.delta * (1e3 / 60)), 
+            this.framerate = f, _CreatejsMovieClip.prototype.updateForPixi.call(this, e);
         }, staticAccessors.framerate.get = function() {
             return this._pixiFramerate;
         }, staticAccessors.framerate.set = function(framerate) {
             this._pixiFramerate = Number(framerate) || 60;
-        }, Object.defineProperties(CreatejsMovieClip.prototype, prototypeAccessors), Object.defineProperties(CreatejsMovieClip, staticAccessors), 
-        CreatejsMovieClip;
+        }, Object.defineProperties(CreatejsMovieClip, staticAccessors), CreatejsMovieClip;
     }(CreatejsMovieClip);
     CreatejsMovieClip$1._pixiFramerate = 60, function(Pixim) {
         !function(animate) {
