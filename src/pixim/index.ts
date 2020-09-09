@@ -6,4 +6,5 @@ initializeAnimate({
 });
 
 export * from '../createjs/MovieClip';
+export * from './Application';
 export * from './Container';

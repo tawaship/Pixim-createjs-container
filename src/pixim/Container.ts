@@ -1,43 +1,34 @@
-import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren, TAnimateLibrary } from '@tawaship/pixi-animate-core';
 import * as _Pixim from '@tawaship/pixim.js';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
-
-/**
- * @ignore
- */
-declare const window: any;
 
 namespace Pixim {
 	export namespace animate {	
 		/**
-		 * Prepare createjs content published with Adobe Animate.
-		 * @async
-		 * @param id "lib.properties.id" in Animate content.
-		 * @param basepath Directory path of Animate content.
-		 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tplayeroption
-		 */
-		export function prepareAsync(id: string, basepath: string, options: TPlayerOption = {}) {
-			return prepareAnimateAsync(id, basepath, options)
-				.then((lib: TAnimateLibrary) => {
-					CreatejsMovieClip.framerate = lib.properties.fps;
-					
-					return lib;
-				});
-		}
-		
-		/**
 		 * @see https://tawaship.github.io/Pixim.js/classes/pixim.container.html
 		 */
 		export class Container extends _Pixim.Container {
-			private _createjsAnimID: number = 0;
-			private _lastCreatejsAnimID: number = 0;
+			private static _id: number = 0;
+			private static _targets: { [id: number]: CreatejsMovieClip} = {};
 			
-			_addCreatejs(cjs) {
+			static tick(delta: number) {
+				for (let i in this._targets) {
+					this._targets[i].updateForPixi({ delta });
+				}
+			}
+			
+			private static _addMovieClip(cjs: CreatejsMovieClip) {
+				const id: number = this._id++;
+				this._targets[id] = cjs;
+				
+				return id;
+			}
+			
+			private static _removeMovlieClip(id: number) {
+				delete(this._targets[id]);
+			}
+			
+			private _addCreatejs(cjs) {
 				if (cjs instanceof CreatejsMovieClip) {
-					function handler(e) {
-						cjs.updateForPixi(e);
-					}
-					
 					const p = cjs.pixi.parent;
 					
 					cjs.pixi.once('added', () => {
@@ -45,9 +36,9 @@ namespace Pixim {
 							cjs.gotoAndPlay(0);
 						}
 						
-						this.task.on('createjsAnim', handler);
+						const id: number = Container._addMovieClip(cjs);
 						cjs.pixi.once('removed', () => {
-							this.task.off('createjsAnim', handler);
+							Container._removeMovlieClip(id);
 						});
 					});
 				}
@@ -75,11 +66,6 @@ namespace Pixim {
 		}
 	}
 }
-
-/**
- * @ignore
- */
-export import prepareAsync = Pixim.animate.prepareAsync;
 
 /**
  * @ignore

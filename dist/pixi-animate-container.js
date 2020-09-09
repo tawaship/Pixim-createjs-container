@@ -2,7 +2,7 @@
  * Pixim-animate-container - v1.1.0
  * 
  * @require pixi.js v5.3.2
- * @require @tawaship/pixim.js v1.6.1
+ * @require @tawaship/pixim.js v1.6.2
  * @author tawaship (makazu.mori@gmail.com)
  * @license MIT
  */
@@ -1128,66 +1128,30 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
     }(CreatejsMovieClip);
     CreatejsMovieClip$1._pixiFramerate = 60, function(PIXI) {
         !function(animate) {
-            animate.prepareAsync = function(id, basepath, options) {
-                return void 0 === options && (options = {}), function(id, basepath, options) {
-                    void 0 === options && (options = {});
-                    var comp = window.AdobeAn.getComposition(id);
-                    if (!comp) {
-                        throw new Error("no composition");
-                    }
-                    var lib = comp.getLibrary();
-                    return options.useSynchedTimeline || Object.defineProperties(window.createjs.MovieClip.prototype, {
-                        updateForPixi: {
-                            value: function(e) {
-                                return this._tick(e);
-                            }
-                        }
-                    }), new Promise((function(resolve, reject) {
-                        0 === lib.properties.manifest.length && resolve({}), basepath && (basepath = (basepath + "/").replace(/([^\:])\/\//, "$1/"));
-                        var loader = new window.createjs.LoadQueue(!1, basepath);
-                        if (loader.installPlugin(window.createjs.Sound), loader.addEventListener("fileload", (function(evt) {
-                            !function(evt, comp) {
-                                var images = comp.getImages();
-                                evt && "image" == evt.item.type && (images[evt.item.id] = evt.result);
-                            }(evt, comp);
-                        })), loader.addEventListener("complete", (function(evt) {
-                            resolve(evt);
-                        })), options.crossOrigin) {
-                            for (var m = lib.properties.manifest, i = 0; i < m.length; i++) {
-                                m[i].crossOrigin = !0;
-                            }
-                        }
-                        loader.loadManifest(lib.properties.manifest);
-                    })).then((function(evt) {
-                        for (var ss = comp.getSpriteSheet(), queue = evt.target, ssMetadata = lib.ssMetadata, i = 0; i < ssMetadata.length; i++) {
-                            ss[ssMetadata[i].name] = new window.createjs.SpriteSheet({
-                                images: [ queue.getResult(ssMetadata[i].name) ],
-                                frames: ssMetadata[i].frames
-                            });
-                        }
-                        return lib;
-                    }));
-                }(id, basepath, options).then((function(lib) {
-                    return CreatejsMovieClip$1.framerate = lib.properties.fps, lib;
-                }));
-            };
             var Container = function(superclass) {
-                function Container(ticker) {
-                    superclass.call(this), this._createjsAnimID = 0, this._lastCreatejsAnimID = 0, this._ticker = ticker;
+                function Container() {
+                    superclass.apply(this, arguments), this._createjsAnimID = 0, this._lastCreatejsAnimID = 0;
                 }
                 return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
-                Container.prototype.constructor = Container, Container.prototype._addCreatejs = function(cjs) {
-                    var this$1 = this;
+                Container.prototype.constructor = Container, Container.tick = function(delta) {
+                    for (var i in this._targets) {
+                        this._targets[i].updateForPixi({
+                            delta: delta
+                        });
+                    }
+                }, Container._addMovieClip = function(cjs) {
+                    var id = this._id++;
+                    return this._targets[id] = cjs, id;
+                }, Container._removeMovlieClip = function(id) {
+                    delete this._targets[id];
+                }, Container.prototype._addCreatejs = function(cjs) {
                     if (cjs instanceof CreatejsMovieClip$1) {
-                        function handler(delta) {
-                            cjs.updateForPixi({
-                                delta: delta
-                            });
-                        }
                         var p = cjs.pixi.parent;
                         cjs.pixi.once("added", (function() {
-                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0), this$1._ticker.add(handler), cjs.pixi.once("removed", (function() {
-                                this$1._ticker.remove(handler);
+                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0);
+                            var id = Container._addMovieClip(cjs);
+                            cjs.pixi.once("removed", (function() {
+                                Container._removeMovlieClip(id);
                             }));
                         }));
                     }
@@ -1199,10 +1163,68 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                     return this.removeChild(cjs.pixi), cjs;
                 }, Container;
             }(_PIXI.Container);
-            animate.Container = Container;
+            Container._id = 0, Container._targets = {}, animate.Container = Container;
         }(PIXI.animate || (PIXI.animate = {}));
     }(PIXI$1 || (PIXI$1 = {}));
-    var prepareAsync = PIXI$1.animate.prepareAsync, Container = PIXI$1.animate.Container;
+    var PIXI$2, Container = PIXI$1.animate.Container;
+    !function(PIXI) {
+        !function(animate) {
+            var Application = function(superclass) {
+                function Application() {
+                    superclass.apply(this, arguments);
+                }
+                return superclass && (Application.__proto__ = superclass), Application.prototype = Object.create(superclass && superclass.prototype), 
+                Application.prototype.constructor = Application, Application.prototype.prepareAsync = function(id, basepath, options) {
+                    var this$1 = this;
+                    return void 0 === options && (options = {}), function(id, basepath, options) {
+                        void 0 === options && (options = {});
+                        var comp = window.AdobeAn.getComposition(id);
+                        if (!comp) {
+                            throw new Error("no composition");
+                        }
+                        var lib = comp.getLibrary();
+                        return options.useSynchedTimeline || Object.defineProperties(window.createjs.MovieClip.prototype, {
+                            updateForPixi: {
+                                value: function(e) {
+                                    return this._tick(e);
+                                }
+                            }
+                        }), new Promise((function(resolve, reject) {
+                            0 === lib.properties.manifest.length && resolve({}), basepath && (basepath = (basepath + "/").replace(/([^\:])\/\//, "$1/"));
+                            var loader = new window.createjs.LoadQueue(!1, basepath);
+                            if (loader.installPlugin(window.createjs.Sound), loader.addEventListener("fileload", (function(evt) {
+                                !function(evt, comp) {
+                                    var images = comp.getImages();
+                                    evt && "image" == evt.item.type && (images[evt.item.id] = evt.result);
+                                }(evt, comp);
+                            })), loader.addEventListener("complete", (function(evt) {
+                                resolve(evt);
+                            })), options.crossOrigin) {
+                                for (var m = lib.properties.manifest, i = 0; i < m.length; i++) {
+                                    m[i].crossOrigin = !0;
+                                }
+                            }
+                            loader.loadManifest(lib.properties.manifest);
+                        })).then((function(evt) {
+                            for (var ss = comp.getSpriteSheet(), queue = evt.target, ssMetadata = lib.ssMetadata, i = 0; i < ssMetadata.length; i++) {
+                                ss[ssMetadata[i].name] = new window.createjs.SpriteSheet({
+                                    images: [ queue.getResult(ssMetadata[i].name) ],
+                                    frames: ssMetadata[i].frames
+                                });
+                            }
+                            return lib;
+                        }));
+                    }(id, basepath, options).then((function(lib) {
+                        return this$1.ticker.add((function(delta) {
+                            Container.tick(delta);
+                        })), CreatejsMovieClip$1.framerate = lib.properties.fps, lib;
+                    }));
+                }, Application;
+            }(_PIXI.Application);
+            animate.Application = Application;
+        }(PIXI.animate || (PIXI.animate = {}));
+    }(PIXI$2 || (PIXI$2 = {}));
+    var Application = PIXI$2.animate.Application;
     !function(obj) {
         for (var i in void 0 === obj && (obj = {}), window.createjs.StageGL = CreatejsStageGL, 
         window.createjs.MovieClip = CreatejsMovieClip, window.createjs.Sprite = CreatejsSprite, 
@@ -1213,7 +1235,6 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
         }
     }({
         MovieClip: CreatejsMovieClip$1
-    }), exports.Container = Container, exports.CreatejsMovieClip = CreatejsMovieClip$1, 
-    exports.prepareAsync = prepareAsync;
+    }), exports.Application = Application, exports.Container = Container, exports.CreatejsMovieClip = CreatejsMovieClip$1;
 }(this.PIXI.animate = this.PIXI.animate || {}, PIXI);
 //# sourceMappingURL=pixi-animate-container.js.map

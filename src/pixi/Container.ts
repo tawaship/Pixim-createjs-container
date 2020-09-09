@@ -2,29 +2,8 @@ import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren, TAnima
 import * as _PIXI from 'pixi.js';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
-/**
- * @ignore
- */
-declare const window: any;
-
 namespace PIXI {
 	export namespace animate {	
-		/**
-		 * Prepare createjs content published with Adobe Animate.
-		 * @async
-		 * @param id "lib.properties.id" in Animate content.
-		 * @param basepath Directory path of Animate content.
-		 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tplayeroption
-		 */
-		export function prepareAsync(id: string, basepath: string, options: TPlayerOption = {}) {
-			return prepareAnimateAsync(id, basepath, options)
-				.then((lib: TAnimateLibrary) => {
-					CreatejsMovieClip.framerate = lib.properties.fps;
-					
-					return lib;
-				});
-		}
-		
 		/**
 		 * @see http://pixijs.download/release/docs/PIXI.Container.html
 		 */
@@ -33,18 +12,28 @@ namespace PIXI {
 			private _lastCreatejsAnimID: number = 0;
 			private _ticker: _PIXI.Ticker;
 			
-			constructor(ticker: _PIXI.Ticker) {
-				super();
-				
-				this._ticker = ticker;
+			private static _id: number = 0;
+			private static _targets: { [id: number]: CreatejsMovieClip} = {};
+			
+			static tick(delta: number) {
+				for (let i in this._targets) {
+					this._targets[i].updateForPixi({ delta });
+				}
 			}
 			
-			_addCreatejs(cjs) {
+			private static _addMovieClip(cjs: CreatejsMovieClip) {
+				const id: number = this._id++;
+				this._targets[id] = cjs;
+				
+				return id;
+			}
+			
+			private static _removeMovlieClip(id: number) {
+				delete(this._targets[id]);
+			}
+			
+			private _addCreatejs(cjs) {
 				if (cjs instanceof CreatejsMovieClip) {
-					function handler(delta) {
-						cjs.updateForPixi({ delta: delta });
-					}
-					
 					const p = cjs.pixi.parent;
 					
 					cjs.pixi.once('added', () => {
@@ -52,9 +41,9 @@ namespace PIXI {
 							cjs.gotoAndPlay(0);
 						}
 						
-						this._ticker.add(handler);
+						const id: number = Container._addMovieClip(cjs);
 						cjs.pixi.once('removed', () => {
-							this._ticker.remove(handler);
+							Container._removeMovlieClip(id);
 						});
 					});
 				}
@@ -82,11 +71,6 @@ namespace PIXI {
 		}
 	}
 }
-
-/**
- * @ignore
- */
-export import prepareAsync = PIXI.animate.prepareAsync;
 
 /**
  * @ignore
