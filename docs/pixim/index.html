@@ -99,15 +99,16 @@
 				<ol start="2">
 					<li>Use</li>
 				</ol>
-				<pre><code class="language-javascript">Pixim.animate.prepareAsync(
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Pixim.animate.Application();
+
+app.prepareAsync(
     <span class="hljs-string">&quot;[conposition id]&quot;</span>, <span class="hljs-comment">// &quot;lib.properties.id&quot; in Animate content.</span>
     <span class="hljs-string">&quot;[content directory path]&quot;</span>, <span class="hljs-comment">// Directory path of Animate content.</span>
     {
-        <span class="hljs-attr">useSynchedTimeline</span>: <span class="hljs-literal">true</span>
+        <span class="hljs-attr">useSynchedTimeline</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">crossOrigin</span>: <span class="hljs-literal">false</span>
     }
-.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">lib</span>) </span>{
-    <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Pixim.Application();
-
+).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">lib</span>) </span>{
     <span class="hljs-keyword">const</span> Game = Pixim.Content.create();
 
     Game.setConfig({

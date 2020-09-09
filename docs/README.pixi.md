@@ -37,15 +37,16 @@ git clone https://github.com/tawaship/Pixim-animate-container
 2. Use
 
 ```javascript
-PIXI.animate.prepareAsync(
+const app = new PIXI.animate.Application();
+
+app.prepareAsync(
 	"[conposition id]", // "lib.properties.id" in Animate content.
 	"[content directory path]", // Directory path of Animate content.
 	{
-		useSynchedTimeline: true
+		useSynchedTimeline: true,
+		crossOrigin: false
 	}
 ).then(function(lib) {
-	const app = new PIXI.Application();
-	
 	class Root extends PIXI.Container {
 		constructor() {
 			super();

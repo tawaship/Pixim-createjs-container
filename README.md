@@ -38,15 +38,16 @@ git clone https://github.com/tawaship/Pixim-animate-container
 2. Use
 
 ```javascript
-Pixim.animate.prepareAsync(
+const app = new Pixim.animate.Application();
+
+app.prepareAsync(
 	"[conposition id]", // "lib.properties.id" in Animate content.
 	"[content directory path]", // Directory path of Animate content.
 	{
-		useSynchedTimeline: true
+		useSynchedTimeline: true,
+		crossOrigin: false
 	}
-.then(function(lib) {
-	const app = new Pixim.Application();
-	
+).then(function(lib) {
 	const Game = Pixim.Content.create();
 	
 	Game.setConfig({
