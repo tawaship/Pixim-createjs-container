@@ -30,7 +30,7 @@
 						
 						this.scale.set(0.5);
 						
-						const container = this.addChild(new PIXI.animate.Container(app.ticker));
+						const container = this.addChild(new PIXI.animate.Container());
 						
 						this.addChild(new Block('Library A', lib.A));
 						
@@ -46,6 +46,7 @@
 						app.ticker.add(delta => {
 							ga.rotation += delta;
 						});
+						
 						ga.x = 100, ga.y = 1100;
 					}
 				}

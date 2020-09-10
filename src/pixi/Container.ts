@@ -1,4 +1,3 @@
-import { prepareAnimateAsync, TPlayerOption, updateDisplayObjectChildren, TAnimateLibrary } from '@tawaship/pixi-animate-core';
 import * as _PIXI from 'pixi.js';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
@@ -8,10 +7,6 @@ namespace PIXI {
 		 * @see http://pixijs.download/release/docs/PIXI.Container.html
 		 */
 		export class Container extends _PIXI.Container {
-			private _createjsAnimID: number = 0;
-			private _lastCreatejsAnimID: number = 0;
-			private _ticker: _PIXI.Ticker;
-			
 			private static _id: number = 0;
 			private static _targets: { [id: number]: CreatejsMovieClip} = {};
 			

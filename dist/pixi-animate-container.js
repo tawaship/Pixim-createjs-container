@@ -1130,7 +1130,7 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
         !function(animate) {
             var Container = function(superclass) {
                 function Container() {
-                    superclass.apply(this, arguments), this._createjsAnimID = 0, this._lastCreatejsAnimID = 0;
+                    superclass.apply(this, arguments);
                 }
                 return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
                 Container.prototype.constructor = Container, Container.tick = function(delta) {
