@@ -53,9 +53,17 @@
 						this.addChild(new PIXI.Text('Animation using library G_A (Graphics)')).y = 1000;
 						const ga = container.addCreatejs(new lib.G_A());
 						
-						container.task.on('rotate', e => {
+						container.task.add([e => {
 							ga.rotation += e.delta;
-						});
+							if (ga.rotation > 180) {
+								container.task.next()
+							}
+						}, e => {
+							ga.rotation -= e.delta;
+							if (ga.rotation < 0) {
+								container.task.prev()
+							}
+						}]);
 						
 						ga.x = 100, ga.y = 1100;
 					}
