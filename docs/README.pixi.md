@@ -43,7 +43,8 @@ app.prepareAsync(
 	"[content directory path]", // Directory path of Animate content.
 	{
 		useSynchedTimeline: true,
-		crossOrigin: false
+		crossOrigin: false,
+		useDeltaTime: false
 	}
 ).then(function(lib) {
 	class Root extends PIXI.Container {

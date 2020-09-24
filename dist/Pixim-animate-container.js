@@ -1,5 +1,5 @@
 /*!
- * Pixim-animate-container - v1.1.2
+ * Pixim-animate-container - v1.1.3
  * 
  * @require pixi.js v5.3.2
  * @require @tawaship/pixim.js v1.7.3
@@ -1215,8 +1215,9 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                             return lib;
                         }));
                     }(id, basepath, options).then((function(lib) {
+                        var useDeltaTime = options.useDeltaTime || !1;
                         return this$1.app.ticker.add((function(delta) {
-                            Container.tick(delta);
+                            Container.tick(useDeltaTime ? delta : 1);
                         })), CreatejsMovieClip$1.framerate = lib.properties.fps, lib;
                     }));
                 }, Application;
