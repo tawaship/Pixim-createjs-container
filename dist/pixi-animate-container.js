@@ -1,5 +1,5 @@
 /*!
- * Pixim-animate-container - v1.1.3
+ * Pixim-animate-container - v1.1.4
  * 
  * @require pixi.js v5.3.2
  * @require @tawaship/pixim.js v1.7.3
@@ -1215,9 +1215,10 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                             return lib;
                         }));
                     }(id, basepath, options).then((function(lib) {
-                        var useDeltaTime = options.useDeltaTime || !1;
-                        return this$1.ticker.add((function(delta) {
-                            Container.tick(useDeltaTime ? delta : 1);
+                        return options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), options.useDeltaTime ? this$1.ticker.add((function(delta) {
+                            Container.tick(delta);
+                        })) : this$1.ticker.add((function(delta) {
+                            Container.tick(1);
                         })), CreatejsMovieClip$1.framerate = lib.properties.fps, lib;
                     }));
                 }, Application;

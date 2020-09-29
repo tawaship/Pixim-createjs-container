@@ -3,18 +3,32 @@ import * as _PIXI from 'pixi.js';
 import { Container } from './Container';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
+/**
+ * @ignore
+ */
+declare const window: any;
+
 namespace PIXI {
 	export namespace animate {
 		/**
-		 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tplayeroption
-		 * @param 
+		 * @private
 		 */
-		export type TPlayerOption = _TPlayerOption & {
+		type TPrepareOption = {
 			/**
 			 * Whether to advance the head of the movie clip in delta time.
 			 */
-			useDeltaTime?: boolean
+			useDeltaTime?: boolean,
+			
+			/**
+			 * Whether to use motion guides.
+			 */
+			useMotionGuide?: boolean
 		};
+		
+		/**
+		 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tplayeroption
+		 */
+		export type TPlayerOption = _TPlayerOption & TPrepareOption;
 		
 		/**
 		 * @see http://pixijs.download/release/docs/PIXI.Application.html
@@ -29,11 +43,19 @@ namespace PIXI {
 			prepareAsync(id: string, basepath: string, options: TPlayerOption = {}) {
 				return prepareAnimateAsync(id, basepath, options)
 					.then((lib: TAnimateLibrary) => {
-						const useDeltaTime = options.useDeltaTime || false;
+						if (options.useMotionGuide) {
+							window.createjs.MotionGuidePlugin.install();
+						}
 						
-						this.ticker.add((delta: number) => {
-							Container.tick(useDeltaTime ? delta : 1);
-						});
+						if (options.useDeltaTime) {
+							this.ticker.add((delta: number) => {
+								Container.tick(delta);
+							});
+						} else {
+							this.ticker.add((delta: number) => {
+								Container.tick(1);
+							});
+						}
 						
 						CreatejsMovieClip.framerate = lib.properties.fps;
 						

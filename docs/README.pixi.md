@@ -44,7 +44,8 @@ app.prepareAsync(
 	{
 		useSynchedTimeline: true,
 		crossOrigin: false,
-		useDeltaTime: false
+		useDeltaTime: false,
+		useMotionGuide: false
 	}
 ).then(function(lib) {
 	class Root extends PIXI.Container {
