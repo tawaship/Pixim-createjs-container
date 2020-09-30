@@ -37,7 +37,6 @@ namespace PIXI {
 			 * @param basepath Directory path of Animate content.
 			 */
 			prepareAsync(id: string, basepath: string, options: IPrepareOption = {}) {
-			console.log(options)
 				return prepareAnimateAsync(id, basepath, options)
 					.then((lib: TAnimateLibrary) => {
 						if (options.useDeltaTime) {

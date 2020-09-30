@@ -1185,7 +1185,7 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                 return superclass && (Application.__proto__ = superclass), Application.prototype = Object.create(superclass && superclass.prototype), 
                 Application.prototype.constructor = Application, Application.prototype.prepareAsync = function(id, basepath, options) {
                     var this$1 = this;
-                    return void 0 === options && (options = {}), console.log(options), function(id, basepath, options) {
+                    return void 0 === options && (options = {}), function(id, basepath, options) {
                         void 0 === options && (options = {});
                         var comp = window.AdobeAn.getComposition(id);
                         if (!comp) {
