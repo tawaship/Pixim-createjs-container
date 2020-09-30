@@ -1,6 +1,6 @@
 {
   "name": "Pixim-animate-container",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -40,7 +40,7 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "@tawaship/pixi-animate-core": "^1.1.0",
+    "@tawaship/pixi-animate-core": "^1.2.0",
     "@tawaship/pixim.js": "^1.7.3",
     "pixi.js": "^5.3.2"
   }

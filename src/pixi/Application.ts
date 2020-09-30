@@ -1,4 +1,4 @@
-import { prepareAnimateAsync, TPlayerOption as _TPlayerOption, TAnimateLibrary } from '@tawaship/pixi-animate-core';
+import { prepareAnimateAsync, IPrepareOption as _IPrepareOption, TAnimateLibrary } from '@tawaship/pixi-animate-core';
 import * as _PIXI from 'pixi.js';
 import { Container } from './Container';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
@@ -11,24 +11,20 @@ declare const window: any;
 namespace PIXI {
 	export namespace animate {
 		/**
-		 * @private
+		 * @see https://tawaship.github.io/pixi-animate-core/interfaces/iprepareoption.html
 		 */
-		type TPrepareOption = {
+		export interface IPrepareOption extends _IPrepareOption {
 			/**
 			 * Whether to advance the head of the movie clip in delta time.
+			 * @since 1.1.3
 			 */
-			useDeltaTime?: boolean,
-			
-			/**
-			 * Whether to use motion guides.
-			 */
-			useMotionGuide?: boolean
+			useDeltaTime?: boolean
 		};
 		
 		/**
-		 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tplayeroption
+		 * @deprecated 1.1.3
 		 */
-		export type TPlayerOption = _TPlayerOption & TPrepareOption;
+		export type TPlayerOption = IPrepareOption;
 		
 		/**
 		 * @see http://pixijs.download/release/docs/PIXI.Application.html
@@ -40,13 +36,10 @@ namespace PIXI {
 			 * @param id "lib.properties.id" in Animate content.
 			 * @param basepath Directory path of Animate content.
 			 */
-			prepareAsync(id: string, basepath: string, options: TPlayerOption = {}) {
+			prepareAsync(id: string, basepath: string, options: IPrepareOption = {}) {
+			console.log(options)
 				return prepareAnimateAsync(id, basepath, options)
 					.then((lib: TAnimateLibrary) => {
-						if (options.useMotionGuide) {
-							window.createjs.MotionGuidePlugin.install();
-						}
-						
 						if (options.useDeltaTime) {
 							this.ticker.add((delta: number) => {
 								Container.tick(delta);

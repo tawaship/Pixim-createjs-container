@@ -11,7 +11,7 @@
 
 ## Support version
 
-- A complete set of content published with Adobe Animate version 20.02
+- A complete set of content published with Adobe Animate version 20.02 / 20.5.1
 - pixi.js 5.3.2
 - Pixim.js 1.7.3
 
@@ -84,9 +84,14 @@ app.prepareAsync(
 });
 ```
 
-## Overrides
+## Change log
 
-- createjs.MovieClip = [CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)
+### 1.0.0
+
+- Overrides
+|name|class|
+|:--|:--|
+|createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)|
 
 ## Links
 
