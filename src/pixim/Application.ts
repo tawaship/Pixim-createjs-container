@@ -12,17 +12,17 @@ namespace Pixim {
 	export namespace animate {
 		/**
 		 * @see https://tawaship.github.io/pixi-animate-core/interfaces/iprepareoption.html
+		 * @since 1.2.0
 		 */
 		export interface IPrepareOption extends _IPrepareOption {
 			/**
 			 * Whether to advance the head of the movie clip in delta time.
-			 * @since 1.1.3
 			 */
 			useDeltaTime?: boolean
 		};
 		
 		/**
-		 * @deprecated 1.1.3
+		 * @deprecated 1.2.0
 		 */
 		export type TPlayerOption = IPrepareOption;
 		
