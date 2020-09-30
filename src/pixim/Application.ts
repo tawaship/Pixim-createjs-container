@@ -28,9 +28,8 @@ namespace Pixim {
 			
 			/**
 			 * Prepare createjs content published with Adobe Animate.
+			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tanimatelibrary
 			 * @async
-			 * @param id "lib.properties.id" in Animate content.
-			 * @param basepath Directory path of Animate content.
 			 */
 			prepareAsync(targets: IPrepareTarget | IPrepareTarget[]) {
 				return loadAssetAsync(targets);

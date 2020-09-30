@@ -52,7 +52,7 @@ const app = new Pixim.animate.Application(
 	} // Options of Pixim.Application
 );
 
-app.loadAssetAsync([{
+app.prepareAsync([{
 	id: "[conposition id]", // "lib.properties.id" in Animate content.
 	basepath: "[content directory path]", // Directory path of Animate content.
 	options: {
