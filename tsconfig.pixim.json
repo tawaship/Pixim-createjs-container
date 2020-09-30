@@ -1,5 +1,5 @@
 {
-  "include": ["src/pixim/**/*.ts", "src/createjs/**/*.ts"],
+  "include": ["src/pixim/**/*.ts", "src/createjs/**/*.ts", "src/common/**/*.ts"],
   "compilerOptions": {
     "target": "ES6"
   },

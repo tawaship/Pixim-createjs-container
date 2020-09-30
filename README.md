@@ -7,13 +7,13 @@
 ---
 
 ## Core module
-[pixi-animate-core](https://tawaship.github.io/pixi-animate-core/)
+[@tawaship/pixi-animate-core](https://tawaship.github.io/pixi-animate-core/)
 
 ## Support version
 
 - A complete set of content published with Adobe Animate version 20.02 / 20.5.1
 - pixi.js 5.3.2
-- Pixim.js 1.7.3
+- Pixim.js 1.7.x
 
 I have not confirmed the operation on other versions.
 
@@ -38,18 +38,28 @@ git clone https://github.com/tawaship/Pixim-animate-container
 2. Use
 
 ```javascript
-const app = new Pixim.animate.Application();
-
-app.prepareAsync(
-	"[conposition id]", // "lib.properties.id" in Animate content.
-	"[content directory path]", // Directory path of Animate content.
+const app = new Pixim.animate.Application(
 	{
 		useSynchedTimeline: true,
-		crossOrigin: false,
 		useDeltaTime: false,
 		useMotionGuide: false
+	},
+	{
+		antialias: true
+	}, // Options of PIXI.Application.
+	{
+		autoAdjust: true
+	} // Options of Pixim.Application
+);
+
+app.loadAssetAsync([{
+	id: "[conposition id]", // "lib.properties.id" in Animate content.
+	basepath: "[content directory path]", // Directory path of Animate content.
+	options: {
+		crossOrigin: false
 	}
-).then(function(lib) {
+}]).then(function(lib) {
+	// If you load multiple contents, the argument "lib" will be an array and the "lib" of each content will be stored in order.
 	const Game = Pixim.Content.create();
 	
 	Game.setConfig({
@@ -58,14 +68,11 @@ app.prepareAsync(
 	});
 	
 	Game.defineLibraries({
-		root: class Root extends PIXI.Container {
+		root: class Root extends Pixim.animate.Container {
 			constructor($) {
 				super();
 				
-				const container = this.addChild(new Pixim.animate.Container());
-				
-				const cls = $.vars.lib.game; // The class you want to use.
-				container.addCreatejs(new cls());
+				this.addCreatejs(new lib.game()); // The class you want to use.
 			}
 		}
 	});

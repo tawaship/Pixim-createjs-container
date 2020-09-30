@@ -5,12 +5,35 @@ var lib={};var ss={};var img={};
 lib.ssMetadata = [];
 
 
+(lib.AnMovieClip = function(){
+	this.actionFrames = [];
+	this.gotoAndPlay = function(positionOrLabel){
+		cjs.MovieClip.prototype.gotoAndPlay.call(this,positionOrLabel);
+	}
+	this.play = function(){
+		cjs.MovieClip.prototype.play.call(this);
+	}
+	this.gotoAndStop = function(positionOrLabel){
+		cjs.MovieClip.prototype.gotoAndStop.call(this,positionOrLabel);
+	}
+	this.stop = function(){
+		cjs.MovieClip.prototype.stop.call(this);
+	}
+}).prototype = p = new cjs.MovieClip();
 // symbols:
 
 
 
-(lib.G_B = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+(lib.G_B = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
 
 	// レイヤー_1
 	this.shape = new cjs.Shape();
@@ -29,8 +52,16 @@ lib.ssMetadata = [];
 p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,42,42);
 
 
-(lib.G_A = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+(lib.G_A = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
 
 	// レイヤー_1
 	this.shape = new cjs.Shape();
@@ -49,8 +80,16 @@ p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,42,42);
 p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,42,42);
 
 
-(lib.B = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+(lib.B = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
 
 	// レイヤー_1
 	this.instance = new lib.G_B("synched",0);
@@ -64,8 +103,16 @@ p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,42,42);
 p.nominalBounds = new cjs.Rectangle(-6.5,-15.2,515,59.400000000000006);
 
 
-(lib.A = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+(lib.A = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
 
 	// レイヤー_1
 	this.instance = new lib.G_A("synched",0);
@@ -79,8 +126,16 @@ p.nominalBounds = new cjs.Rectangle(-6.5,-15.2,515,59.400000000000006);
 p.nominalBounds = new cjs.Rectangle(-6.5,-12.5,524,54.1);
 
 
-(lib.C = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+(lib.C = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
 
 	// レイヤー_1
 	this.instance = new lib.A("synched",0);
@@ -95,8 +150,16 @@ p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,524,122.8);
 
 
 // stage content:
-(lib.game = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
+(lib.game = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
 
 	// レイヤー_4
 	this.instance = new lib.C();
@@ -280,7 +343,7 @@ p.nominalBounds = new cjs.Rectangle(-6.5,-6.5,524,122.8);
 
 	this._renderFirstFrame();
 
-}).prototype = p = new cjs.MovieClip();
+}).prototype = p = new lib.AnMovieClip();
 p.nominalBounds = new cjs.Rectangle(285.4,205.4,105.60000000000002,98.20000000000002);
 // library properties:
 lib.properties = {
@@ -300,7 +363,7 @@ lib.properties = {
 
 (lib.Stage = function(canvas) {
 	createjs.Stage.call(this, canvas);
-}).prototype = p = new createjs.StageGL();
+}).prototype = p = new createjs.Stage();
 
 p.setAutoPlay = function(autoPlay) {
 	this.tickEnabled = autoPlay;
@@ -368,19 +431,27 @@ an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers)
 			else if(scaleType==2) {					
 				sRatio = Math.max(xRatio, yRatio);				
 			}			
-		}			
+		}
 		domContainers[0].width = w * pRatio * sRatio;			
-		domContainers[0].height = h * pRatio * sRatio;			
+		domContainers[0].height = h * pRatio * sRatio;
 		domContainers.forEach(function(container) {				
 			container.style.width = w * sRatio + 'px';				
 			container.style.height = h * sRatio + 'px';			
-		});			
+		});
 		stage.scaleX = pRatio*sRatio;			
-		stage.scaleY = pRatio*sRatio;			
+		stage.scaleY = pRatio*sRatio;
 		lastW = iw; lastH = ih; lastS = sRatio;            
 		stage.tickOnUpdate = false;            
 		stage.update();            
 		stage.tickOnUpdate = true;		
+	}
+}
+an.handleSoundStreamOnTick = function(event) {
+	if(!event.paused){
+		var stageChild = stage.getChildAt(0);
+		if(!stageChild.paused){
+			stageChild.syncStreamSounds();
+		}
 	}
 }
 

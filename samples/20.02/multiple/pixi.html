@@ -6,11 +6,13 @@
 		<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 		<script src="../../../lib/pixi.5.3.2.min.js"></script>
 		<script src="../../../dist/pixi-animate-container.js"></script>
-		<script src="game/game.js"></script>
+		<script src="../animation/game/game.js"></script>
+		<script src="../class/game/game.js"></script>
 	</head>
 	<body>
 		<script>
 			const pRatio = window.devicePixelRatio || 1;
+			
 			const app = new PIXI.animate.Application({
 				useSynchedTimeline: true,
 				useDeltaTime: false
@@ -22,27 +24,28 @@
 				backgroundColor: 0xFFFFFF
 			});
 			
-			app.prepareAsync({
-				id: '2FA8E0C7230941478CE2CA3DB82DBEDF_1',
-				basepath: 'game/',
-				options: {
-					crossOrigin: false
+			app.prepareAsync([
+				{
+					id: '2FA8E0C7230941478CE2CA3DB82DBEDF',
+					basepath: '../class/game/'
+				},
+				{
+					id: '2FA8E0C7230941478CE2CA3DB82DBEDF_1',
+					basepath: '../animation/game/'
 				}
-			})
+			])
 			.then(function(lib) {
-				class Root extends PIXI.Container {
+				class Root extends PIXI.animate.Container {
 					constructor() {
 						super();
 						
 						this.x = 10;
 						this.y = 10;
-						this.scale.set(0.7);
 						
-						const container = this.addChild(new PIXI.animate.Container());
+						this.scale.set(0.5);
 						
-						container.addChild(new PIXI.Text('Library game'));
-						const a = container.addCreatejs(new lib.game());
-						a.y = 50;
+						this.addCreatejs(new lib[0].game()).y = 100;
+						this.addCreatejs(new lib[1].game()).y = 500;
 					}
 				}
 				

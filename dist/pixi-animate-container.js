@@ -1,15 +1,15 @@
 /*!
- * Pixim-animate-container - v1.2.0
+ * Pixim-animate-container - v2.0.1
  * 
  * @require pixi.js v5.3.2
- * @require @tawaship/pixim.js v1.7.3
+ * @require @tawaship/pixim.js v1.7.4
  * @author tawaship (makazu.mori@gmail.com)
  * @license MIT
  */
 this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
     "use strict";
     /*!
-     * @tawaship/pixi-animate-core - v1.2.0
+     * @tawaship/pixi-animate-core - v2.0.1
      * 
      * @require pixi.js v5.3.2
      * @author tawaship (makazu.mori@gmail.com)
@@ -324,7 +324,7 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
             subInstance: pixi
         });
     }
-    var CreatejsMovieClipTemp = window.createjs.MovieClip, CreatejsMovieClip = function(superclass) {
+    var CreatejsMovieClipTemp = window.createjs.MovieClip, _funcFlag = !0, CreatejsMovieClip = function(superclass) {
         function CreatejsMovieClip() {
             for (var args = [], len = arguments.length; len--; ) {
                 args[len] = arguments[len];
@@ -354,7 +354,7 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                 _off: !1,
                 mask: null,
                 filters: null
-            }, this._pixiData = createMovieClipPixiData(this);
+            }, this._pixiData = createMovieClipPixiData(this), this.updateForPixi = _funcFlag ? this._updateForPixiSynched : this._updateForPixiUnsynched;
         }, CreatejsMovieClip.prototype.initialize = function() {
             for (var args = [], len = arguments.length; len--; ) {
                 args[len] = arguments[len];
@@ -372,8 +372,12 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
             return this._pixiData.subInstance.removeChildren(), superclass.prototype.removeAllChldren.call(this);
         }, prototypeAccessors$1.pixi.get = function() {
             return this._pixiData.instance;
-        }, CreatejsMovieClip.prototype.updateForPixi = function(e) {
+        }, CreatejsMovieClip.selectUpdateFunc = function(flag) {
+            _funcFlag = flag;
+        }, CreatejsMovieClip.prototype._updateForPixiSynched = function(e) {
             return this._updateState(), updateDisplayObjectChildren(this, e);
+        }, CreatejsMovieClip.prototype._updateForPixiUnsynched = function(e) {
+            return this._tick(e);
         }, Object.defineProperties(CreatejsMovieClip.prototype, prototypeAccessors$1), CreatejsMovieClip;
     }(window.createjs.MovieClip);
     appendDisplayObjectDescriptor(CreatejsMovieClip), Object.defineProperties(CreatejsMovieClip.prototype, {
@@ -1113,29 +1117,63 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
         }
         return superclass && (CreatejsButtonHelper.__proto__ = superclass), CreatejsButtonHelper.prototype = Object.create(superclass && superclass.prototype), 
         CreatejsButtonHelper.prototype.constructor = CreatejsButtonHelper, CreatejsButtonHelper;
-    }(window.createjs.ButtonHelper);
-    var PIXI$1, CreatejsMovieClip$1 = function(_CreatejsMovieClip) {
-        function CreatejsMovieClip() {
-            _CreatejsMovieClip.apply(this, arguments);
+    }(window.createjs.ButtonHelper), _isPrepare = !1;
+    function loadAssetAsync(id, basepath, options) {
+        void 0 === options && (options = {});
+        var comp = window.AdobeAn.getComposition(id);
+        if (!comp) {
+            throw new Error("no composition");
         }
-        _CreatejsMovieClip && (CreatejsMovieClip.__proto__ = _CreatejsMovieClip), CreatejsMovieClip.prototype = Object.create(_CreatejsMovieClip && _CreatejsMovieClip.prototype), 
-        CreatejsMovieClip.prototype.constructor = CreatejsMovieClip;
-        var staticAccessors = {
-            framerate: {
-                configurable: !0
+        var lib = comp.getLibrary();
+        return new Promise((function(resolve, reject) {
+            0 === lib.properties.manifest.length && resolve({}), basepath && (basepath = (basepath + "/").replace(/([^\:])\/\//, "$1/"));
+            var loader = new window.createjs.LoadQueue(!1, basepath);
+            if (loader.installPlugin(window.createjs.Sound), loader.addEventListener("fileload", (function(evt) {
+                !function(evt, comp) {
+                    var images = comp.getImages();
+                    evt && "image" == evt.item.type && (images[evt.item.id] = evt.result);
+                }(evt, comp);
+            })), loader.addEventListener("complete", (function(evt) {
+                resolve(evt);
+            })), options.crossOrigin) {
+                for (var m = lib.properties.manifest, i = 0; i < m.length; i++) {
+                    m[i].crossOrigin = !0;
+                }
             }
-        };
-        return CreatejsMovieClip.prototype.updateForPixi = function(e) {
-            var f = this.framerate;
-            return this.framerate = f || CreatejsMovieClip._pixiFramerate, this.advance(e.delta * (1e3 / 60)), 
-            this.framerate = f, _CreatejsMovieClip.prototype.updateForPixi.call(this, e);
-        }, staticAccessors.framerate.get = function() {
-            return this._pixiFramerate;
-        }, staticAccessors.framerate.set = function(framerate) {
-            this._pixiFramerate = Number(framerate) || 60;
-        }, Object.defineProperties(CreatejsMovieClip, staticAccessors), CreatejsMovieClip;
-    }(CreatejsMovieClip);
-    CreatejsMovieClip$1._pixiFramerate = 60, function(PIXI) {
+            loader.loadManifest(lib.properties.manifest);
+        })).then((function(evt) {
+            for (var ss = comp.getSpriteSheet(), queue = evt.target, ssMetadata = lib.ssMetadata, i = 0; i < ssMetadata.length; i++) {
+                ss[ssMetadata[i].name] = new window.createjs.SpriteSheet({
+                    images: [ queue.getResult(ssMetadata[i].name) ],
+                    frames: ssMetadata[i].frames
+                });
+            }
+            return lib;
+        }));
+    }
+    var PIXI$1, P = 1e3 / 60, CreatejsMovieClip$1 = function(_CreatejsMovieClip) {
+        function CreatejsMovieClip() {
+            for (var args = [], len = arguments.length; len--; ) {
+                args[len] = arguments[len];
+            }
+            _CreatejsMovieClip.apply(this, arguments), this.framerate = this._framerateBase;
+        }
+        return _CreatejsMovieClip && (CreatejsMovieClip.__proto__ = _CreatejsMovieClip), 
+        CreatejsMovieClip.prototype = Object.create(_CreatejsMovieClip && _CreatejsMovieClip.prototype), 
+        CreatejsMovieClip.prototype.constructor = CreatejsMovieClip, CreatejsMovieClip.prototype.initialize = function() {
+            for (var args = [], len = arguments.length; len--; ) {
+                args[len] = arguments[len];
+            }
+            _CreatejsMovieClip.prototype.initialize.apply(this, arguments), this.framerate = this._framerateBase;
+        }, CreatejsMovieClip.prototype._updateForPixiSynched = function(e) {
+            return this.advance(e.delta * P), _CreatejsMovieClip.prototype._updateForPixiSynched.call(this, e);
+        }, CreatejsMovieClip.prototype._updateForPixiUnsynched = function(e) {
+            return _CreatejsMovieClip.prototype._updateForPixiUnsynched.call(this, {
+                delta: .2777777777777778 * e.delta * this.framerate
+            });
+        }, CreatejsMovieClip;
+    }(CreatejsMovieClip), _promises = {};
+    !function(PIXI) {
         !function(animate) {
             var Container = function(superclass) {
                 function Container() {
@@ -1179,57 +1217,44 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
     !function(PIXI) {
         !function(animate) {
             var Application = function(superclass) {
-                function Application() {
-                    superclass.apply(this, arguments);
+                function Application(options, pixiOptions) {
+                    void 0 === options && (options = {}), void 0 === pixiOptions && (pixiOptions = {}), 
+                    superclass.call(this, pixiOptions), function(options) {
+                        void 0 === options && (options = {}), _isPrepare || (CreatejsMovieClip.selectUpdateFunc(options.useSynchedTimeline), 
+                        options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), _isPrepare = !0);
+                    }(options), options.useDeltaTime ? this.ticker.add((function(delta) {
+                        Container.tick(delta);
+                    })) : this.ticker.add((function(delta) {
+                        Container.tick(1);
+                    }));
                 }
                 return superclass && (Application.__proto__ = superclass), Application.prototype = Object.create(superclass && superclass.prototype), 
-                Application.prototype.constructor = Application, Application.prototype.prepareAsync = function(id, basepath, options) {
-                    var this$1 = this;
-                    return void 0 === options && (options = {}), function(id, basepath, options) {
-                        void 0 === options && (options = {});
-                        var comp = window.AdobeAn.getComposition(id);
-                        if (!comp) {
-                            throw new Error("no composition");
+                Application.prototype.constructor = Application, Application.prototype.prepareAsync = function(targets) {
+                    return function(targets) {
+                        Array.isArray(targets) || (targets = [ targets ]);
+                        for (var promises = [], i = 0; i < targets.length; i++) {
+                            if (!window.AdobeAn.getComposition(targets[i].id)) {
+                                throw new Error("no composition: " + targets[i].id);
+                            }
                         }
-                        var lib = comp.getLibrary();
-                        return options.useSynchedTimeline || Object.defineProperties(window.createjs.MovieClip.prototype, {
-                            updateForPixi: {
-                                value: function(e) {
-                                    return this._tick(e);
-                                }
+                        for (var i$1 = 0; i$1 < targets.length; i$1++) {
+                            var target = targets[i$1], name = target.id + "@" + target.basepath, p = _promises[name];
+                            if (p) {
+                                promises.push(p);
+                            } else {
+                                var b = _promises[name] = loadAssetAsync(target.id, target.basepath, target.options).then((function(lib) {
+                                    for (var i in lib) {
+                                        lib[i].prototype instanceof CreatejsMovieClip$1 && (lib[i].prototype._framerateBase = lib.properties.fps);
+                                    }
+                                    return lib;
+                                }));
+                                promises.push(b);
                             }
-                        }), options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), new Promise((function(resolve, reject) {
-                            0 === lib.properties.manifest.length && resolve({}), basepath && (basepath = (basepath + "/").replace(/([^\:])\/\//, "$1/"));
-                            var loader = new window.createjs.LoadQueue(!1, basepath);
-                            if (loader.installPlugin(window.createjs.Sound), loader.addEventListener("fileload", (function(evt) {
-                                !function(evt, comp) {
-                                    var images = comp.getImages();
-                                    evt && "image" == evt.item.type && (images[evt.item.id] = evt.result);
-                                }(evt, comp);
-                            })), loader.addEventListener("complete", (function(evt) {
-                                resolve(evt);
-                            })), options.crossOrigin) {
-                                for (var m = lib.properties.manifest, i = 0; i < m.length; i++) {
-                                    m[i].crossOrigin = !0;
-                                }
-                            }
-                            loader.loadManifest(lib.properties.manifest);
-                        })).then((function(evt) {
-                            for (var ss = comp.getSpriteSheet(), queue = evt.target, ssMetadata = lib.ssMetadata, i = 0; i < ssMetadata.length; i++) {
-                                ss[ssMetadata[i].name] = new window.createjs.SpriteSheet({
-                                    images: [ queue.getResult(ssMetadata[i].name) ],
-                                    frames: ssMetadata[i].frames
-                                });
-                            }
-                            return lib;
+                        }
+                        return Promise.all(promises).then((function(resolvers) {
+                            return 1 === resolvers.length ? resolvers[0] : resolvers;
                         }));
-                    }(id, basepath, options).then((function(lib) {
-                        return options.useDeltaTime ? this$1.ticker.add((function(delta) {
-                            Container.tick(delta);
-                        })) : this$1.ticker.add((function(delta) {
-                            Container.tick(1);
-                        })), CreatejsMovieClip$1.framerate = lib.properties.fps, lib;
-                    }));
+                    }(targets);
                 }, Application;
             }(_PIXI.Application);
             animate.Application = Application;
@@ -1247,6 +1272,6 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
         }
     }({
         MovieClip: CreatejsMovieClip$1
-    }), exports.Application = Application, exports.Container = Container, exports.CreatejsMovieClip = CreatejsMovieClip$1;
+    }), exports.Application = Application, exports.Container = Container;
 }(this.PIXI.animate = this.PIXI.animate || {}, PIXI);
 //# sourceMappingURL=pixi-animate-container.js.map

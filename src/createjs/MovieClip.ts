@@ -6,45 +6,54 @@ import { CreatejsMovieClip as _CreatejsMovieClip, TTickerData } from '@tawaship/
 const P: number = 1000 / 60;
 
 /**
+ * @ignore
+ */
+const Q: number = P / 60;
+
+/**
  * @private
  */
 type TFramerate = number | null;
 
 /**
+ * @ignore
+ */
+const DEF_FRAMERATE = 60;
+
+/**
+ * @private
  * @see https://tawaship.github.io/pixi-animate-core/classes/createjsmovieclip.html
  */
 export class CreatejsMovieClip extends _CreatejsMovieClip {
+	declare private _framerateBase: number;
+	
+	constructor(...args: any[]) {
+		super(...arguments);
+		
+		this.framerate = this._framerateBase;
+	}
+	
+	initialize(...args: any[]) {
+		super.initialize(...arguments);
+		
+		this.framerate = this._framerateBase;
+	}
+	
 	/**
 	 * @override
-	 * @see https://tawaship.github.io/pixi-animate-core/globals.html#ttickerdata
 	 */
-	updateForPixi(e: TTickerData) {
-		const f = this.framerate;
-		
-		this.framerate = f || CreatejsMovieClip._pixiFramerate;
+	protected _updateForPixiSynched(e: TTickerData) {
 		this.advance(e.delta * P);
-		this.framerate = f;
 		
-		return super.updateForPixi(e);
+		return super._updateForPixiSynched(e);
 	}
 	
 	/**
-	 * Current framerate.
-	 * If you enter a value that be falsy, the current value of CreatejsMovieClip.framerate will be set.
+	 * @override
 	 */
-	declare framerate: TFramerate;
-	
-	private static _pixiFramerate: number = 60;
-	
-	static get framerate() {
-		return this._pixiFramerate;
-	}
-	
-	/**
-	 * Change the default frame rate for all movie clips.
-	 * However, if the framerate is set individually, the individual setting has priority.
-	 */
-	static set framerate(framerate: number) {
-		this._pixiFramerate = Number(framerate) || 60;
+	protected _updateForPixiUnsynched(e: TTickerData) {
+		return super._updateForPixiUnsynched({
+			delta: e.delta * Q * this.framerate
+		});
 	}
 }

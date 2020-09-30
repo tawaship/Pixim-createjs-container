@@ -7,7 +7,7 @@
 ---
 
 ## Core module
-[pixi-animate-core](https://tawaship.github.io/pixi-animate-core/)
+[@tawaship/pixi-animate-core](https://tawaship.github.io/pixi-animate-core/)
 
 ## Support version
 
@@ -36,26 +36,30 @@ git clone https://github.com/tawaship/Pixim-animate-container
 2. Use
 
 ```javascript
-const app = new PIXI.animate.Application();
-
-app.prepareAsync(
-	"[conposition id]", // "lib.properties.id" in Animate content.
-	"[content directory path]", // Directory path of Animate content.
+const app = new PIXI.animate.Application(
 	{
 		useSynchedTimeline: true,
-		crossOrigin: false,
 		useDeltaTime: false,
 		useMotionGuide: false
+	},
+	{
+		autoAdjust: true
+	} // Options of Pixim.Application
+);
+
+app.loadAssetAsync([{
+	id: "[conposition id]", // "lib.properties.id" in Animate content.
+	basepath: "[content directory path]", // Directory path of Animate content.
+	options: {
+		crossOrigin: false
 	}
-).then(function(lib) {
-	class Root extends PIXI.Container {
+}]).then(function(lib) {
+	// If you load multiple contents, the argument "lib" will be an array and the "lib" of each content will be stored in order.
+	class Root extends PIXI.animate.Container {
 		constructor() {
 			super();
 			
-			const container = this.addChild(new PIXI.animate.Container(app.ticker));
-			
-			const cls = lib.game; // The class you want to use.
-			container.addCreatejs(new cls());
+			this.addCreatejs(new lib.game()); // The class you want to use.
 		}
 	}
 	

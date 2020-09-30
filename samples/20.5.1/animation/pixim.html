@@ -13,6 +13,9 @@
 		<script>
 			const pRatio = window.devicePixelRatio || 1;
 			const app = new Pixim.animate.Application({
+				useSynchedTimeline: true,
+				useDeltaTime: false
+			}, {
 				width: 450,
 				height: 800,
 				antialias: true,
@@ -20,7 +23,13 @@
 				backgroundColor: 0xFFFFFF
 			});
 			
-			app.prepareAsync('2FA8E0C7230941478CE2CA3DB82DBEDF', 'game/', { useSynchedTimeline: true })
+			app.prepareAsync({
+				id: '2FA8E0C7230941478CE2CA3DB82DBEDF_1',
+				basepath: 'game/',
+				options: {
+					crossOrigin: false
+				}
+			})
 			.then(function(lib) {
 				const Game = Pixim.Content.create();
 				

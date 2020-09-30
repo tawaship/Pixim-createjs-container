@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>pixi-animate-container - v1.2.0</title>
-	<meta name="description" content="Documentation for pixi-animate-container - v1.2.0">
+	<title>pixi-animate-container - v2.0.1</title>
+	<meta name="description" content="Documentation for pixi-animate-container - v2.0.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">pixi-animate-container - v1.2.0</a>
+					<a href="index.html" class="title">pixi-animate-container - v2.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>pixi-animate-container - v1.2.0</h1>
+			<h1>pixi-animate-container - v2.0.1</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<a href="#core-module" id="core-module" style="color: inherit; text-decoration: none;">
 					<h2>Core module</h2>
 				</a>
-				<p><a href="https://tawaship.github.io/pixi-animate-core/">pixi-animate-core</a></p>
+				<p><a href="https://tawaship.github.io/pixi-animate-core/">@tawaship/pixi-animate-core</a></p>
 				<a href="#support-version" id="support-version" style="color: inherit; text-decoration: none;">
 					<h2>Support version</h2>
 				</a>
@@ -97,26 +97,30 @@
 				<ol start="2">
 					<li>Use</li>
 				</ol>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> PIXI.animate.Application();
-
-app.prepareAsync(
-    <span class="hljs-string">&quot;[conposition id]&quot;</span>, <span class="hljs-comment">// &quot;lib.properties.id&quot; in Animate content.</span>
-    <span class="hljs-string">&quot;[content directory path]&quot;</span>, <span class="hljs-comment">// Directory path of Animate content.</span>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> PIXI.animate.Application(
     {
         <span class="hljs-attr">useSynchedTimeline</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">crossOrigin</span>: <span class="hljs-literal">false</span>,
         <span class="hljs-attr">useDeltaTime</span>: <span class="hljs-literal">false</span>,
         <span class="hljs-attr">useMotionGuide</span>: <span class="hljs-literal">false</span>
+    },
+    {
+        <span class="hljs-attr">autoAdjust</span>: <span class="hljs-literal">true</span>
+    } <span class="hljs-comment">// Options of Pixim.Application</span>
+);
+
+app.loadAssetAsync([{
+    <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;[conposition id]&quot;</span>, <span class="hljs-comment">// &quot;lib.properties.id&quot; in Animate content.</span>
+    <span class="hljs-attr">basepath</span>: <span class="hljs-string">&quot;[content directory path]&quot;</span>, <span class="hljs-comment">// Directory path of Animate content.</span>
+    <span class="hljs-attr">options</span>: {
+        <span class="hljs-attr">crossOrigin</span>: <span class="hljs-literal">false</span>
     }
-).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">lib</span>) </span>{
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Root</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PIXI</span>.<span class="hljs-title">Container</span> </span>{
+}]).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">lib</span>) </span>{
+    <span class="hljs-comment">// If you load multiple contents, the argument &quot;lib&quot; will be an array and the &quot;lib&quot; of each content will be stored in order.</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Root</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PIXI</span>.<span class="hljs-title">animate</span>.<span class="hljs-title">Container</span> </span>{
         <span class="hljs-keyword">constructor</span>() {
             <span class="hljs-built_in">super</span>();
 
-            <span class="hljs-keyword">const</span> container = <span class="hljs-built_in">this</span>.addChild(<span class="hljs-keyword">new</span> PIXI.animate.Container(app.ticker));
-
-            <span class="hljs-keyword">const</span> cls = lib.game; <span class="hljs-comment">// The class you want to use.</span>
-            container.addCreatejs(<span class="hljs-keyword">new</span> cls());
+            <span class="hljs-built_in">this</span>.addCreatejs(<span class="hljs-keyword">new</span> lib.game()); <span class="hljs-comment">// The class you want to use.</span>
         }
     }
 
@@ -168,8 +172,14 @@ app.prepareAsync(
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
+					<li class=" tsd-kind-class tsd-is-private">
 						<a href="classes/createjsmovieclip.html" class="tsd-kind-icon">Createjs<wbr>Movie<wbr>Clip</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/iprepareoption.html" class="tsd-kind-icon">IPrepare<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-private">
+						<a href="interfaces/ipreparetarget.html" class="tsd-kind-icon">IPrepare<wbr>Target</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-private">
 						<a href="globals.html#tframerate" class="tsd-kind-icon">TFramerate</a>
@@ -184,12 +194,21 @@ app.prepareAsync(
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 		</div>
 	</div>
