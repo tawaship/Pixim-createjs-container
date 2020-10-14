@@ -1237,10 +1237,10 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                 }
             }), animate.init = function(options) {
                 return void 0 === options && (options = {}), _isInit ? (console.warn("[Pixim-animate-container] Already initialized."), 
-                this) : (_isInit = !0, function(options) {
+                Pixim.animate) : (_isInit = !0, function(options) {
                     void 0 === options && (options = {}), _isPrepare || (CreatejsMovieClip.selectUpdateFunc(options.useSynchedTimeline), 
                     options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), _isPrepare = !0);
-                }(options), Container.setTickHandler(!!options.useDeltaTime), this);
+                }(options), Container.setTickHandler(!!options.useDeltaTime), Pixim.animate);
             }, animate.loadAssetAsync = function(targets) {
                 if (!_isInit) {
                     throw new Error('[Pixim-animate-container] Please execute "Pixim.animate.init" first.');

@@ -71,18 +71,19 @@ namespace Pixim {
 		
 		/**
 		 * @since 3.0.0
+		 * @return Returns itself for the method chaining.
 		 */
 		export function init(options: IPrepareOption = {}) {
 			if (_isInit) {
 				console.warn('[Pixim-animate-container] Already initialized.');
-				return this;
+				return Pixim.animate;
 			}
 			
 			_isInit = true;
 			prepareAnimate(options);
 			Container.setTickHandler(!!options.useDeltaTime);
 			
-			return this;
+			return Pixim.animate;
 		}
 		/**
 		 * Load the assets of createjs content published by Adobe Animate.

@@ -71,18 +71,19 @@ namespace PIXI {
 		
 		/**
 		 * @since 3.0.0
+		 * @return Returns itself for the method chaining.
 		 */
 		export function init(options: IPrepareOption = {}) {
 			if (_isInit) {
 				console.warn('[pixi-animate-container] Already initialized.');
-				return this;
+				return PIXI.animate;
 			}
 			
 			_isInit = true;
 			prepareAnimate(options);
 			Container.setTickHandler(!!options.useDeltaTime);
 			
-			return this;
+			return PIXI.animate;
 		}
 		/**
 		 * Load assets of createjs content published with Adobe Animate.
