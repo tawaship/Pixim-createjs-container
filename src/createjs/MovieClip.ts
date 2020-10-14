@@ -11,17 +11,6 @@ const P: number = 1000 / 60;
 const Q: number = P / 60;
 
 /**
- * @private
- */
-type TFramerate = number | null;
-
-/**
- * @ignore
- */
-const DEF_FRAMERATE = 60;
-
-/**
- * @private
  * @see https://tawaship.github.io/pixi-animate-core/classes/createjsmovieclip.html
  */
 export class CreatejsMovieClip extends _CreatejsMovieClip {

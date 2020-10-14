@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Container | pixi-animate-container - v2.0.2</title>
-	<meta name="description" content="Documentation for pixi-animate-container - v2.0.2">
+	<title>Container | pixi-animate-container - v3.0.0</title>
+	<meta name="description" content="Documentation for pixi-animate-container - v3.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">pixi-animate-container - v2.0.2</a>
+					<a href="../index.html" class="title">pixi-animate-container - v3.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -163,6 +163,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="pixi.animate.container.html#zindex" class="tsd-kind-icon">z<wbr>Index</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="pixi.animate.container.html#_id" class="tsd-kind-icon">_id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="pixi.animate.container.html#_targets" class="tsd-kind-icon">_targets</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="pixi.animate.container.html#tick" class="tsd-kind-icon">tick</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -208,8 +209,10 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="pixi.animate.container.html#updatetransform" class="tsd-kind-icon">update<wbr>Transform</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="pixi.animate.container.html#_addmovieclip" class="tsd-kind-icon">_add<wbr>Movie<wbr>Clip</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="pixi.animate.container.html#_removemovlieclip" class="tsd-kind-icon">_remove<wbr>Movlie<wbr>Clip</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="pixi.animate.container.html#_tickdelta" class="tsd-kind-icon">_tick<wbr>Delta</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="pixi.animate.container.html#_ticknodelta" class="tsd-kind-icon">_tick<wbr>NoDelta</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="pixi.animate.container.html#mixin" class="tsd-kind-icon">mixin</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="pixi.animate.container.html#tick" class="tsd-kind-icon">tick</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="pixi.animate.container.html#settickhandler" class="tsd-kind-icon">set<wbr>Tick<wbr>Handler</a></li>
 							</ul>
 						</section>
 					</div>
@@ -1577,7 +1580,7 @@
 					<div class="tsd-signature tsd-kind-icon">_id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L10">src/pixi/Container.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L15">src/pixi/Container.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -1587,7 +1590,7 @@
 					<div class="tsd-signature tsd-kind-icon">_targets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L11">src/pixi/Container.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L16">src/pixi/Container.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -1598,6 +1601,16 @@
 							</li>
 						</ul>
 					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="tick" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> tick</h3>
+					<div class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">:</span> <a href="../modules/pixi.animate.html#ttickhandler" class="tsd-signature-type">TTickHandler</a><span class="tsd-signature-symbol"> = Container._tickDelta</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L17">src/pixi/Container.ts:17</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -1612,7 +1625,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L30">src/pixi/Container.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L50">src/pixi/Container.ts:50</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1801,7 +1814,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L47">src/pixi/Container.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L67">src/pixi/Container.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1824,7 +1837,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L54">src/pixi/Container.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L74">src/pixi/Container.ts:74</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2560,7 +2573,7 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L61">src/pixi/Container.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L81">src/pixi/Container.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2942,7 +2955,7 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L19">src/pixi/Container.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L39">src/pixi/Container.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2965,13 +2978,59 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L26">src/pixi/Container.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L46">src/pixi/Container.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>id: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="_tickdelta" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _tick<wbr>Delta</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">_tick<wbr>Delta<span class="tsd-signature-symbol">(</span>delta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L27">src/pixi/Container.ts:27</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>delta: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="_ticknodelta" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _tick<wbr>NoDelta</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">_tick<wbr>NoDelta<span class="tsd-signature-symbol">(</span>delta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L33">src/pixi/Container.ts:33</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>delta: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3011,22 +3070,22 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="tick" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> tick</h3>
+					<a name="settickhandler" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> set<wbr>Tick<wbr>Handler</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>delta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Tick<wbr>Handler<span class="tsd-signature-symbol">(</span>useDeltaTime<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L13">src/pixi/Container.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/tawaship/Pixim-animate-container/blob/master/src/pixi/Container.ts#L19">src/pixi/Container.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>delta: <span class="tsd-signature-type">number</span></h5>
+									<h5>useDeltaTime: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3051,9 +3110,6 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="pixi.animate.application.html" class="tsd-kind-icon">Application</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
@@ -3230,6 +3286,9 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
 								<a href="pixi.animate.container.html#_targets" class="tsd-kind-icon">_targets</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="pixi.animate.container.html#tick" class="tsd-kind-icon">tick</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="pixi.animate.container.html#_addcreatejs" class="tsd-kind-icon">_add<wbr>Createjs</a>
 							</li>
@@ -3350,16 +3409,34 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
 								<a href="pixi.animate.container.html#_removemovlieclip" class="tsd-kind-icon">_remove<wbr>Movlie<wbr>Clip</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="pixi.animate.container.html#_tickdelta" class="tsd-kind-icon">_tick<wbr>Delta</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="pixi.animate.container.html#_ticknodelta" class="tsd-kind-icon">_tick<wbr>NoDelta</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="pixi.animate.container.html#mixin" class="tsd-kind-icon">mixin</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="pixi.animate.container.html#tick" class="tsd-kind-icon">tick</a>
+								<a href="pixi.animate.container.html#settickhandler" class="tsd-kind-icon">set<wbr>Tick<wbr>Handler</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
+						<a href="../interfaces/pixi.animate.ipreparetarget.html" class="tsd-kind-icon">IPrepare<wbr>Target</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
+						<a href="../modules/pixi.animate.html#ttickhandler" class="tsd-kind-icon">TTick<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="../modules/pixi.animate.html#init" class="tsd-kind-icon">init</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="../modules/pixi.animate.html#loadassetasync" class="tsd-kind-icon">load<wbr>Asset<wbr>Async</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -3383,13 +3460,11 @@ elem.disable<span class="hljs-constructor">TempParent(<span class="hljs-params">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>

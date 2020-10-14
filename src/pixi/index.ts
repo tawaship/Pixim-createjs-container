@@ -5,5 +5,5 @@ initializeAnimate({
 	MovieClip: CreatejsMovieClip
 });
 
-export * from './Application';
 export * from './Container';
+export * from './funcs';

@@ -36,18 +36,19 @@ git clone https://github.com/tawaship/Pixim-animate-container
 2. Use
 
 ```javascript
-const app = new PIXI.animate.Application(
-	{
-		useSynchedTimeline: true,
-		useDeltaTime: false,
-		useMotionGuide: false
-	},
+const app = new PIXI.Application(
 	{
 		autoAdjust: true
 	} // Options of Pixim.Application
 );
 
-app.prepareAsync([{
+PIXI.animate.init({
+	useSynchedTimeline: true,
+	useDeltaTime: false,
+	useMotionGuide: false
+});
+
+PIXI.animate.loadAssetAsync([{
 	id: "[conposition id]", // "lib.properties.id" in Animate content.
 	basepath: "[content directory path]", // Directory path of Animate content.
 	options: {
@@ -76,6 +77,12 @@ app.prepareAsync([{
 |name|class|
 |:--|:--|
 |createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)|
+
+### 3.0.0
+
+- [remove] PIXI.animate.Application
+- [add] [PIXI.animate.init](https://tawaship.github.io/Pixim-animate-container/docs/pixi/modules/pixi.animate.html#init)
+- [add] [PIXI.animate.loadAssetAsync](https://tawaship.github.io/Pixim-animate-container/docs/pixi/modules/pixi.animate.html#loadassetasync)
 
 ## Links
 

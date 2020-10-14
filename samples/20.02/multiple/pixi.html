@@ -13,10 +13,7 @@
 		<script>
 			const pRatio = window.devicePixelRatio || 1;
 			
-			const app = new PIXI.animate.Application({
-				useSynchedTimeline: true,
-				useDeltaTime: false
-			}, {
+			const app = new PIXI.Application({
 				width: 450,
 				height: 800,
 				antialias: true,
@@ -24,7 +21,11 @@
 				backgroundColor: 0xFFFFFF
 			});
 			
-			app.prepareAsync([
+			PIXI.animate.init({
+				useSynchedTimeline: true,
+				useDeltaTime: false
+			})
+			.loadAssetAsync([
 				{
 					id: '2FA8E0C7230941478CE2CA3DB82DBEDF',
 					basepath: '../class/game/'

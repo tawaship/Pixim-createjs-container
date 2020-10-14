@@ -1,5 +1,5 @@
 {
-  "include": ["src/pixi/**/*.ts", "src/createjs/**/*.ts", "src/common/**/*.ts"],
+  "include": ["src/pixi/**/*.ts", "src/createjs/**/*.ts"],
   "compilerOptions": {
     "target": "ES6"
   },

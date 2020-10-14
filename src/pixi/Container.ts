@@ -2,17 +2,37 @@ import * as _PIXI from 'pixi.js';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
 namespace PIXI {
-	export namespace animate {	
+	export namespace animate {
+		/**
+		 * @since 3.0.0
+		 */
+		export type TTickHandler = (delta: number) => void;
+		
 		/**
 		 * @see http://pixijs.download/release/docs/PIXI.Container.html
 		 */
 		export class Container extends _PIXI.Container {
 			private static _id: number = 0;
 			private static _targets: { [id: number]: CreatejsMovieClip} = {};
+			static tick: TTickHandler = Container._tickDelta;
 			
-			static tick(delta: number) {
+			static setTickHandler(useDeltaTime: boolean) {
+				if (useDeltaTime) {
+					this.tick = this._tickDelta;
+				} else {
+					this.tick = this._tickNoDelta;
+				}
+			}
+			
+			private static _tickDelta(delta: number) {
 				for (let i in this._targets) {
 					this._targets[i].updateForPixi({ delta });
+				}
+			}
+			
+			private static _tickNoDelta(delta: number) {
+				for (let i in this._targets) {
+					this._targets[i].updateForPixi({ delta: 1 });
 				}
 			}
 			
@@ -71,3 +91,8 @@ namespace PIXI {
  * @ignore
  */
 export import Container = PIXI.animate.Container;
+
+/**
+ * @ignore
+ */
+export import TTickHandler = PIXI.animate.TTickHandler;

@@ -13,7 +13,7 @@
 
 - A complete set of content published with Adobe Animate version 20.02 / 20.5.1
 - pixi.js 5.3.2
-- Pixim.js 1.7.x
+- Pixim.js 1.7.x / 1.8.x
 
 I have not confirmed the operation on other versions.
 
@@ -38,12 +38,7 @@ git clone https://github.com/tawaship/Pixim-animate-container
 2. Use
 
 ```javascript
-const app = new Pixim.animate.Application(
-	{
-		useSynchedTimeline: true,
-		useDeltaTime: false,
-		useMotionGuide: false
-	},
+const app = new Pixim.Application(
 	{
 		antialias: true
 	}, // Options of PIXI.Application.
@@ -52,7 +47,13 @@ const app = new Pixim.animate.Application(
 	} // Options of Pixim.Application
 );
 
-app.prepareAsync([{
+Pixim.animate.init({
+	useSynchedTimeline: true,
+	useDeltaTime: false,
+	useMotionGuide: false
+});
+
+Pixim.animate.loadAssetAsync([{
 	id: "[conposition id]", // "lib.properties.id" in Animate content.
 	basepath: "[content directory path]", // Directory path of Animate content.
 	options: {
@@ -99,6 +100,12 @@ app.prepareAsync([{
 |name|class|
 |:--|:--|
 |createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)|
+
+### 3.0.0
+
+- [remove] Pixim.animate.Application
+- [add] [Pixim.animate.init](https://tawaship.github.io/Pixim-animate-container/docs/pixim/modules/pixim.animate.html#init)
+- [add] [Pixim.animate.loadAssetAsync](https://tawaship.github.io/Pixim-animate-container/docs/pixim/modules/pixim.animate.html#loadassetasync)
 
 ## Links
 
