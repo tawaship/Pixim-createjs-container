@@ -6,4 +6,4 @@ initializeAnimate({
 });
 
 export * from './Container';
-export * from './funcs';
+export * from './core';

@@ -1,6 +1,5 @@
 import { IPrepareOption as _IPrepareOption, loadAssetAsync as _loadAssetAsync, ILoadAssetOption, TAnimateLibrary, prepareAnimate } from '@tawaship/pixi-animate-core';
-import * as _PIXI from 'pixi.js';
-import { Container, TTickHandler } from './Container';
+import { ITickOption, tickOption } from './TickOption';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
 /**
@@ -17,15 +16,9 @@ namespace PIXI {
 	export namespace animate {
 		/**
 		 * @see https://tawaship.github.io/pixi-animate-core/interfaces/iprepareoption.html
-		 * @ignore
 		 * @since 3.0.0
 		 */
-		export interface IPrepareOption extends _IPrepareOption {
-			/**
-			 * Whether to advance the head of the movie clip in delta time.
-			 */
-			useDeltaTime?: boolean
-		};
+ 		export interface IInitOption extends _IPrepareOption, ITickOption {}
 		
 		/**
 		 * @since 3.0.0
@@ -53,47 +46,37 @@ namespace PIXI {
 		const _promises: { [name: string]: Promise<TAnimateLibrary> } = {};
 		
 		/**
-		 * @ignore
-		 */
-		const _handleContainer: TTickHandler = (delta: number) => {
-			Container.tick(delta);
-		};
-		
-		_PIXI.Application.registerPlugin({
-			init() {
-				this.ticker.add(_handleContainer);
-			},
-			
-			destroy() {
-				this.ticker.remove(_handleContainer);
-			}
-		});
-		
-		/**
 		 * @since 3.0.0
 		 * @return Returns itself for the method chaining.
 		 */
-		export function init(options: IPrepareOption = {}) {
+		export function init(options: IInitOption) {
 			if (_isInit) {
-				console.warn('[pixi-animate-container] Already initialized.');
+				console.warn('[PIXI-animate-container] Already initialized.');
 				return PIXI.animate;
 			}
 			
-			_isInit = true;
+			if (!options.ticker) {
+				console.warn('[PIXI-animate-container] It may not work because no ticker is specified.');
+			}
+			
 			prepareAnimate(options);
-			Container.setTickHandler(!!options.useDeltaTime);
+			tickOption.ticker = options.ticker;
+			tickOption.useDeltaTime = options.useDeltaTime;
+			
+			_isInit = true;
 			
 			return PIXI.animate;
 		}
 		/**
-		 * Load assets of createjs content published with Adobe Animate.
-		 * If you use multiple contents, each composition id must be unique.
+		 * Load the assets of createjs content published by Adobe Animate.
+		 * If you use multiple contents, each composition ID must be unique.
+		 * Please run "PIXI.animate.init" before running.
 		 * @async
 		 * @since 3.0.0
 		 */
 		export function loadAssetAsync(targets: IPrepareTarget | IPrepareTarget[]) {
 			if (!_isInit) {
-				throw new Error('[pixi-animate-container] Please execute "PIXI.animate.init" first.');
+				throw new Error('[PIXI-animate-container] Please execute "PIXI.animate.init" first.');
 			}
 			
 			if (!Array.isArray(targets)) {
@@ -159,7 +142,12 @@ export import loadAssetAsync = PIXI.animate.loadAssetAsync;
 /**
  * @ignore
  */
-export import IPrepareOption = PIXI.animate.IPrepareOption;
+export { ITickOption } from './TickOption';
+
+/**
+ * @ignore
+ */
+export import IInitOption = PIXI.animate.IInitOption;
 
 /**
  * @ignore

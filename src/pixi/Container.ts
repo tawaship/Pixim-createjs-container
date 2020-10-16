@@ -1,53 +1,59 @@
+import { Ticker } from 'pixi.js';
 import * as _PIXI from 'pixi.js';
+import { TCreatejsObject } from '@tawaship/pixi-animate-core';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
+import { ITickOption, tickOption } from './TickOption';
 
 namespace PIXI {
 	export namespace animate {
 		/**
 		 * @since 3.0.0
 		 */
-		export type TTickHandler = (delta: number) => void;
+		export interface ICreatejsData {
+			id: number,
+			targets: { [id: number]: CreatejsMovieClip},
+			ticker?: Ticker
+		}
 		
 		/**
 		 * @see http://pixijs.download/release/docs/PIXI.Container.html
 		 */
 		export class Container extends _PIXI.Container {
-			private static _id: number = 0;
-			private static _targets: { [id: number]: CreatejsMovieClip} = {};
-			static tick: TTickHandler = Container._tickDelta;
+			private _createjsData: ICreatejsData;
 			
-			static setTickHandler(useDeltaTime: boolean) {
-				if (useDeltaTime) {
-					this.tick = this._tickDelta;
-				} else {
-					this.tick = this._tickNoDelta;
-				}
-			}
-			
-			private static _tickDelta(delta: number) {
-				for (let i in this._targets) {
-					this._targets[i].updateForPixi({ delta });
-				}
-			}
-			
-			private static _tickNoDelta(delta: number) {
-				for (let i in this._targets) {
-					this._targets[i].updateForPixi({ delta: 1 });
-				}
-			}
-			
-			private static _addMovieClip(cjs: CreatejsMovieClip) {
-				const id: number = this._id++;
-				this._targets[id] = cjs;
+			/**
+			 * @param tikcer A ticker that synchronizes the processing of child createjs instances.
+			 */
+			constructor(ticker?: Ticker) {
+				super();
 				
-				return id;
+				this._createjsData = {
+					id: 0,
+					targets: [],
+					ticker
+				};
+				
+				this.on('added', () => {
+					this._createjsData.ticker = this._createjsData.ticker || tickOption.ticker;
+					this._createjsData.ticker.add(this._handleTick, this);
+				});
+				
+				this.on('removed', () => {
+					this._createjsData.ticker.remove(this._handleTick, this);
+				});
 			}
 			
-			private static _removeMovlieClip(id: number) {
-				delete(this._targets[id]);
+			private _handleTick(delta: number) {
+				const e = !tickOption.useDeltaTime ? { delta: 1 }: { delta };
+				for (let i in this._createjsData.targets) {
+					this._createjsData.targets[i].updateForPixi(e);
+				}
 			}
 			
-			private _addCreatejs(cjs) {
+			/**
+			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 */
+			private _addCreatejs(cjs: TCreatejsObject) {
 				if (cjs instanceof CreatejsMovieClip) {
 					const p = cjs.pixi.parent;
 					
@@ -56,29 +62,40 @@ namespace PIXI {
 							cjs.gotoAndPlay(0);
 						}
 						
-						const id: number = Container._addMovieClip(cjs);
+						const id: number = this._createjsData.id++;
+						this._createjsData.targets[id] = cjs;
+						
 						cjs.pixi.once('removed', () => {
-							Container._removeMovlieClip(id);
+							delete(this._createjsData.targets[id]);
 						});
 					});
 				}
 			}
 			
-			addCreatejs(cjs) {
+			/**
+			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 */
+			addCreatejs(cjs: TCreatejsObject) {
 				this._addCreatejs(cjs);
 				this.addChild(cjs.pixi);
 				
 				return cjs;
 			}
 			
-			addCreatejsAt(cjs, index) {
+			/**
+			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 */
+			addCreatejsAt(cjs: TCreatejsObject, index: number) {
 				this._addCreatejs(cjs);
 				this.addChildAt(cjs.pixi, index);
 				
 				return cjs;
 			}
 			
-			removeCreatejs(cjs) {
+			/**
+			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 */
+			removeCreatejs(cjs: TCreatejsObject) {
 				this.removeChild(cjs.pixi);
 				
 				return cjs;
@@ -91,8 +108,3 @@ namespace PIXI {
  * @ignore
  */
 export import Container = PIXI.animate.Container;
-
-/**
- * @ignore
- */
-export import TTickHandler = PIXI.animate.TTickHandler;

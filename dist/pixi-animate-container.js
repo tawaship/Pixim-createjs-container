@@ -1,5 +1,5 @@
 /*!
- * Pixim-animate-container - v3.0.0
+ * Pixim-animate-container - v3.0.1
  * 
  * @require pixi.js v5.3.2
  * @require @tawaship/pixim.js v1.8.0
@@ -9,7 +9,7 @@
 this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
     "use strict";
     /*!
-     * @tawaship/pixi-animate-core - v2.0.2
+     * @tawaship/pixi-animate-core - v2.0.3
      * 
      * @require pixi.js v5.3.2
      * @author tawaship (makazu.mori@gmail.com)
@@ -1174,39 +1174,47 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
         }, CreatejsMovieClip;
     }(CreatejsMovieClip);
     !function(PIXI) {
+        PIXI.animate || (PIXI.animate = {});
+    }(PIXI$1 || (PIXI$1 = {}));
+    var PIXI$2, tickOption = {
+        ticker: null,
+        useDeltaTime: !1
+    };
+    !function(PIXI) {
         !function(animate) {
             var Container = function(superclass) {
-                function Container() {
-                    superclass.apply(this, arguments);
+                function Container(ticker) {
+                    var this$1 = this;
+                    superclass.call(this), this._createjsData = {
+                        id: 0,
+                        targets: [],
+                        ticker: ticker
+                    }, this.on("added", (function() {
+                        this$1._createjsData.ticker = this$1._createjsData.ticker || tickOption.ticker, 
+                        this$1._createjsData.ticker.add(this$1._handleTick, this$1);
+                    })), this.on("removed", (function() {
+                        this$1._createjsData.ticker.remove(this$1._handleTick, this$1);
+                    }));
                 }
                 return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
-                Container.prototype.constructor = Container, Container.setTickHandler = function(useDeltaTime) {
-                    this.tick = useDeltaTime ? this._tickDelta : this._tickNoDelta;
-                }, Container._tickDelta = function(delta) {
-                    for (var i in this._targets) {
-                        this._targets[i].updateForPixi({
-                            delta: delta
-                        });
+                Container.prototype.constructor = Container, Container.prototype._handleTick = function(delta) {
+                    var e = tickOption.useDeltaTime ? {
+                        delta: delta
+                    } : {
+                        delta: 1
+                    };
+                    for (var i in this._createjsData.targets) {
+                        this._createjsData.targets[i].updateForPixi(e);
                     }
-                }, Container._tickNoDelta = function(delta) {
-                    for (var i in this._targets) {
-                        this._targets[i].updateForPixi({
-                            delta: 1
-                        });
-                    }
-                }, Container._addMovieClip = function(cjs) {
-                    var id = this._id++;
-                    return this._targets[id] = cjs, id;
-                }, Container._removeMovlieClip = function(id) {
-                    delete this._targets[id];
                 }, Container.prototype._addCreatejs = function(cjs) {
+                    var this$1 = this;
                     if (cjs instanceof CreatejsMovieClip$1) {
                         var p = cjs.pixi.parent;
                         cjs.pixi.once("added", (function() {
                             cjs.pixi.parent !== p && cjs.gotoAndPlay(0);
-                            var id = Container._addMovieClip(cjs);
-                            cjs.pixi.once("removed", (function() {
-                                Container._removeMovlieClip(id);
+                            var id = this$1._createjsData.id++;
+                            this$1._createjsData.targets[id] = cjs, cjs.pixi.once("removed", (function() {
+                                delete this$1._createjsData.targets[id];
                             }));
                         }));
                     }
@@ -1218,32 +1226,24 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                     return this.removeChild(cjs.pixi), cjs;
                 }, Container;
             }(_PIXI.Container);
-            Container._id = 0, Container._targets = {}, Container.tick = Container._tickDelta, 
             animate.Container = Container;
         }(PIXI.animate || (PIXI.animate = {}));
-    }(PIXI$1 || (PIXI$1 = {}));
-    var PIXI$2, Container = PIXI$1.animate.Container, _isInit = !1;
+    }(PIXI$2 || (PIXI$2 = {}));
+    var PIXI$3, Container = PIXI$2.animate.Container, _isInit = !1;
     !function(PIXI) {
         !function(animate) {
-            var _promises = {}, _handleContainer = function(delta) {
-                Container.tick(delta);
-            };
-            _PIXI.Application.registerPlugin({
-                init: function() {
-                    this.ticker.add(_handleContainer);
-                },
-                destroy: function() {
-                    this.ticker.remove(_handleContainer);
-                }
-            }), animate.init = function(options) {
-                return void 0 === options && (options = {}), _isInit ? (console.warn("[pixi-animate-container] Already initialized."), 
-                PIXI.animate) : (_isInit = !0, function(options) {
+            var _promises = {};
+            animate.init = function(options) {
+                return _isInit ? (console.warn("[PIXI-animate-container] Already initialized."), 
+                PIXI.animate) : (options.ticker || console.warn("[PIXI-animate-container] It may not work because no ticker is specified."), 
+                function(options) {
                     void 0 === options && (options = {}), _isPrepare || (CreatejsMovieClip.selectUpdateFunc(options.useSynchedTimeline), 
                     options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), _isPrepare = !0);
-                }(options), Container.setTickHandler(!!options.useDeltaTime), PIXI.animate);
+                }(options), tickOption.ticker = options.ticker, tickOption.useDeltaTime = options.useDeltaTime, 
+                _isInit = !0, PIXI.animate);
             }, animate.loadAssetAsync = function(targets) {
                 if (!_isInit) {
-                    throw new Error('[pixi-animate-container] Please execute "PIXI.animate.init" first.');
+                    throw new Error('[PIXI-animate-container] Please execute "PIXI.animate.init" first.');
                 }
                 Array.isArray(targets) || (targets = [ targets ]);
                 for (var promises = [], i = 0; i < targets.length; i++) {
@@ -1270,8 +1270,8 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                 }));
             };
         }(PIXI.animate || (PIXI.animate = {}));
-    }(PIXI$2 || (PIXI$2 = {}));
-    var init = PIXI$2.animate.init, loadAssetAsync$1 = PIXI$2.animate.loadAssetAsync;
+    }(PIXI$3 || (PIXI$3 = {}));
+    var init = PIXI$3.animate.init, loadAssetAsync$1 = PIXI$3.animate.loadAssetAsync;
     !function(obj) {
         for (var i in void 0 === obj && (obj = {}), window.createjs.Stage = CreatejsStage, 
         window.createjs.StageGL = CreatejsStageGL, window.createjs.MovieClip = CreatejsMovieClip, 

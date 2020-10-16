@@ -1,5 +1,5 @@
 /*!
- * Pixim-animate-container - v3.0.0
+ * Pixim-animate-container - v3.0.1
  * 
  * @require pixi.js v5.3.2
  * @require @tawaship/pixim.js v1.8.0
@@ -9,7 +9,7 @@
 this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
     "use strict";
     /*!
-     * @tawaship/pixi-animate-core - v2.0.2
+     * @tawaship/pixi-animate-core - v2.0.3
      * 
      * @require pixi.js v5.3.2
      * @author tawaship (makazu.mori@gmail.com)
@@ -1174,73 +1174,23 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
         }, CreatejsMovieClip;
     }(CreatejsMovieClip);
     !function(Pixim) {
-        !function(animate) {
-            var Container = function(superclass) {
-                function Container() {
-                    superclass.apply(this, arguments);
-                }
-                return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
-                Container.prototype.constructor = Container, Container.setTickHandler = function(useDeltaTime) {
-                    this.tick = useDeltaTime ? this._tickDelta : this._tickNoDelta;
-                }, Container._tickDelta = function(delta) {
-                    for (var i in this._targets) {
-                        this._targets[i].updateForPixi({
-                            delta: delta
-                        });
-                    }
-                }, Container._tickNoDelta = function(delta) {
-                    for (var i in this._targets) {
-                        this._targets[i].updateForPixi({
-                            delta: 1
-                        });
-                    }
-                }, Container._addMovieClip = function(cjs) {
-                    var id = this._id++;
-                    return this._targets[id] = cjs, id;
-                }, Container._removeMovlieClip = function(id) {
-                    delete this._targets[id];
-                }, Container.prototype._addCreatejs = function(cjs) {
-                    if (cjs instanceof CreatejsMovieClip$1) {
-                        var p = cjs.pixi.parent;
-                        cjs.pixi.once("added", (function() {
-                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0);
-                            var id = Container._addMovieClip(cjs);
-                            cjs.pixi.once("removed", (function() {
-                                Container._removeMovlieClip(id);
-                            }));
-                        }));
-                    }
-                }, Container.prototype.addCreatejs = function(cjs) {
-                    return this._addCreatejs(cjs), this.addChild(cjs.pixi), cjs;
-                }, Container.prototype.addCreatejsAt = function(cjs, index) {
-                    return this._addCreatejs(cjs), this.addChildAt(cjs.pixi, index), cjs;
-                }, Container.prototype.removeCreatejs = function(cjs) {
-                    return this.removeChild(cjs.pixi), cjs;
-                }, Container;
-            }(_Pixim.Container);
-            Container._id = 0, Container._targets = {}, Container.tick = Container._tickDelta, 
-            animate.Container = Container;
-        }(Pixim.animate || (Pixim.animate = {}));
+        Pixim.animate || (Pixim.animate = {});
     }(Pixim || (Pixim = {}));
-    var Pixim$1, Container = Pixim.animate.Container, _isInit = !1;
+    var Pixim$1, tickOption = {
+        ticker: null,
+        useDeltaTime: !1
+    }, _isInit = !1;
     !function(Pixim) {
         !function(animate) {
-            var _promises = {}, _handleContainer = function(delta) {
-                Container.tick(delta);
-            };
-            pixi_js.Application.registerPlugin({
-                init: function() {
-                    this.ticker.add(_handleContainer);
-                },
-                destroy: function() {
-                    this.ticker.remove(_handleContainer);
-                }
-            }), animate.init = function(options) {
-                return void 0 === options && (options = {}), _isInit ? (console.warn("[Pixim-animate-container] Already initialized."), 
-                Pixim.animate) : (_isInit = !0, function(options) {
+            var _promises = {};
+            animate.init = function(options) {
+                return _isInit ? (console.warn("[Pixim-animate-container] Already initialized."), 
+                Pixim.animate) : (options.ticker || console.warn("[Pixim-animate-container] It may not work because no ticker is specified."), 
+                function(options) {
                     void 0 === options && (options = {}), _isPrepare || (CreatejsMovieClip.selectUpdateFunc(options.useSynchedTimeline), 
                     options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), _isPrepare = !0);
-                }(options), Container.setTickHandler(!!options.useDeltaTime), Pixim.animate);
+                }(options), tickOption.ticker = options.ticker, tickOption.useDeltaTime = options.useDeltaTime, 
+                _isInit = !0, Pixim.animate);
             }, animate.loadAssetAsync = function(targets) {
                 if (!_isInit) {
                     throw new Error('[Pixim-animate-container] Please execute "Pixim.animate.init" first.');
@@ -1271,7 +1221,57 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
             };
         }(Pixim.animate || (Pixim.animate = {}));
     }(Pixim$1 || (Pixim$1 = {}));
-    var init = Pixim$1.animate.init, loadAssetAsync$1 = Pixim$1.animate.loadAssetAsync;
+    var Pixim$2, init = Pixim$1.animate.init, loadAssetAsync$1 = Pixim$1.animate.loadAssetAsync;
+    !function(Pixim) {
+        !function(animate) {
+            var Container = function(superclass) {
+                function Container(ticker) {
+                    var this$1 = this;
+                    superclass.call(this), this._createjsData = {
+                        id: 0,
+                        targets: [],
+                        ticker: ticker
+                    }, this.on("added", (function() {
+                        this$1._createjsData.ticker = this$1._createjsData.ticker || tickOption.ticker, 
+                        this$1._createjsData.ticker.add(this$1._handleTick, this$1);
+                    })), this.on("removed", (function() {
+                        this$1._createjsData.ticker.remove(this$1._handleTick, this$1);
+                    }));
+                }
+                return superclass && (Container.__proto__ = superclass), Container.prototype = Object.create(superclass && superclass.prototype), 
+                Container.prototype.constructor = Container, Container.prototype._handleTick = function(delta) {
+                    var e = tickOption.useDeltaTime ? {
+                        delta: delta
+                    } : {
+                        delta: 1
+                    };
+                    for (var i in this._createjsData.targets) {
+                        this._createjsData.targets[i].updateForPixi(e);
+                    }
+                }, Container.prototype._addCreatejs = function(cjs) {
+                    var this$1 = this;
+                    if (cjs instanceof CreatejsMovieClip$1) {
+                        var p = cjs.pixi.parent;
+                        cjs.pixi.once("added", (function() {
+                            cjs.pixi.parent !== p && cjs.gotoAndPlay(0);
+                            var id = this$1._createjsData.id++;
+                            this$1._createjsData.targets[id] = cjs, cjs.pixi.once("removed", (function() {
+                                delete this$1._createjsData.targets[id];
+                            }));
+                        }));
+                    }
+                }, Container.prototype.addCreatejs = function(cjs) {
+                    return this._addCreatejs(cjs), this.addChild(cjs.pixi), cjs;
+                }, Container.prototype.addCreatejsAt = function(cjs, index) {
+                    return this._addCreatejs(cjs), this.addChildAt(cjs.pixi, index), cjs;
+                }, Container.prototype.removeCreatejs = function(cjs) {
+                    return this.removeChild(cjs.pixi), cjs;
+                }, Container;
+            }(_Pixim.Container);
+            animate.Container = Container;
+        }(Pixim.animate || (Pixim.animate = {}));
+    }(Pixim$2 || (Pixim$2 = {}));
+    var Container = Pixim$2.animate.Container;
     !function(obj) {
         for (var i in void 0 === obj && (obj = {}), window.createjs.Stage = CreatejsStage, 
         window.createjs.StageGL = CreatejsStageGL, window.createjs.MovieClip = CreatejsMovieClip, 

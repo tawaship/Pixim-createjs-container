@@ -1,6 +1,5 @@
 import { IPrepareOption as _IPrepareOption, loadAssetAsync as _loadAssetAsync, ILoadAssetOption, TAnimateLibrary, prepareAnimate } from '@tawaship/pixi-animate-core';
-import { Application } from 'pixi.js';
-import { Container, TTickHandler } from './Container';
+import { ITickOption, tickOption } from './TickOption';
 import { CreatejsMovieClip } from '../createjs/MovieClip';
 
 /**
@@ -17,15 +16,9 @@ namespace Pixim {
 	export namespace animate {
 		/**
 		 * @see https://tawaship.github.io/pixi-animate-core/interfaces/iprepareoption.html
-		 * @ignore
 		 * @since 3.0.0
 		 */
-		export interface IPrepareOption extends _IPrepareOption {
-			/**
-			 * Whether to advance the head of the movie clip in delta time.
-			 */
-			useDeltaTime?: boolean
-		};
+ 		export interface IInitOption extends _IPrepareOption, ITickOption {}
 		
 		/**
 		 * @since 3.0.0
@@ -53,35 +46,24 @@ namespace Pixim {
 		const _promises: { [name: string]: Promise<TAnimateLibrary> } = {};
 		
 		/**
-		 * @ignore
-		 */
-		const _handleContainer: TTickHandler = (delta: number) => {
-			Container.tick(delta);
-		};
-		
-		Application.registerPlugin({
-			init() {
-				this.ticker.add(_handleContainer);
-			},
-			
-			destroy() {
-				this.ticker.remove(_handleContainer);
-			}
-		});
-		
-		/**
 		 * @since 3.0.0
 		 * @return Returns itself for the method chaining.
 		 */
-		export function init(options: IPrepareOption = {}) {
+		export function init(options: IInitOption) {
 			if (_isInit) {
 				console.warn('[Pixim-animate-container] Already initialized.');
 				return Pixim.animate;
 			}
 			
-			_isInit = true;
+			if (!options.ticker) {
+				console.warn('[Pixim-animate-container] It may not work because no ticker is specified.');
+			}
+			
 			prepareAnimate(options);
-			Container.setTickHandler(!!options.useDeltaTime);
+			tickOption.ticker = options.ticker;
+			tickOption.useDeltaTime = options.useDeltaTime;
+			
+			_isInit = true;
 			
 			return Pixim.animate;
 		}
@@ -160,7 +142,12 @@ export import loadAssetAsync = Pixim.animate.loadAssetAsync;
 /**
  * @ignore
  */
-export import IPrepareOption = Pixim.animate.IPrepareOption;
+export { ITickOption } from './TickOption';
+
+/**
+ * @ignore
+ */
+export import IInitOption = Pixim.animate.IInitOption;
 
 /**
  * @ignore
