@@ -56,7 +56,7 @@ namespace Pixim {
 			}
 			
 			if (!options.ticker) {
-				console.warn('[Pixim-animate-container] It may not work because no ticker is specified.');
+				console.warn('[Pixim-animate-container] It may not work because no default ticker is specified.');
 			}
 			
 			prepareAnimate(options);

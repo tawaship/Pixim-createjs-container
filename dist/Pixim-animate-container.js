@@ -1,5 +1,5 @@
 /*!
- * Pixim-animate-container - v3.0.1
+ * Pixim-animate-container - v3.0.0
  * 
  * @require pixi.js v5.3.2
  * @require @tawaship/pixim.js v1.8.0
@@ -1185,7 +1185,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
             var _promises = {};
             animate.init = function(options) {
                 return _isInit ? (console.warn("[Pixim-animate-container] Already initialized."), 
-                Pixim.animate) : (options.ticker || console.warn("[Pixim-animate-container] It may not work because no ticker is specified."), 
+                Pixim.animate) : (options.ticker || console.warn("[Pixim-animate-container] It may not work because no default ticker is specified."), 
                 function(options) {
                     void 0 === options && (options = {}), _isPrepare || (CreatejsMovieClip.selectUpdateFunc(options.useSynchedTimeline), 
                     options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), _isPrepare = !0);

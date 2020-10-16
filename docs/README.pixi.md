@@ -11,7 +11,7 @@
 
 ## Support version
 
-- A complete set of content published with Adobe Animate version 20.02 / 20.5.1
+- A complete set of content published with Adobe Animate version 20.02 | 20.5.1
 - pixi.js 5.3.2
 
 I have not confirmed the operation on other versions.
@@ -45,7 +45,8 @@ const app = new PIXI.Application(
 PIXI.animate.init({
 	useSynchedTimeline: true,
 	useDeltaTime: false,
-	useMotionGuide: false
+	useMotionGuide: false,
+	ticker: app.ticker
 });
 
 PIXI.animate.loadAssetAsync([{

@@ -51,12 +51,12 @@ namespace PIXI {
 		 */
 		export function init(options: IInitOption) {
 			if (_isInit) {
-				console.warn('[PIXI-animate-container] Already initialized.');
+				console.warn('[pixi-animate-container] Already initialized.');
 				return PIXI.animate;
 			}
 			
 			if (!options.ticker) {
-				console.warn('[PIXI-animate-container] It may not work because no ticker is specified.');
+				console.warn('[pixi-animate-container] It may not work because no default ticker is specified.');
 			}
 			
 			prepareAnimate(options);
@@ -76,7 +76,7 @@ namespace PIXI {
 		 */
 		export function loadAssetAsync(targets: IPrepareTarget | IPrepareTarget[]) {
 			if (!_isInit) {
-				throw new Error('[PIXI-animate-container] Please execute "PIXI.animate.init" first.');
+				throw new Error('[pixi-animate-container] Please execute "PIXI.animate.init" first.');
 			}
 			
 			if (!Array.isArray(targets)) {

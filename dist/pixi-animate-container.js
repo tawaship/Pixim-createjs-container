@@ -1,5 +1,5 @@
 /*!
- * Pixim-animate-container - v3.0.1
+ * Pixim-animate-container - v3.0.0
  * 
  * @require pixi.js v5.3.2
  * @require @tawaship/pixim.js v1.8.0
@@ -1234,8 +1234,8 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
         !function(animate) {
             var _promises = {};
             animate.init = function(options) {
-                return _isInit ? (console.warn("[PIXI-animate-container] Already initialized."), 
-                PIXI.animate) : (options.ticker || console.warn("[PIXI-animate-container] It may not work because no ticker is specified."), 
+                return _isInit ? (console.warn("[pixi-animate-container] Already initialized."), 
+                PIXI.animate) : (options.ticker || console.warn("[pixi-animate-container] It may not work because no default ticker is specified."), 
                 function(options) {
                     void 0 === options && (options = {}), _isPrepare || (CreatejsMovieClip.selectUpdateFunc(options.useSynchedTimeline), 
                     options.useMotionGuide && window.createjs.MotionGuidePlugin.install(), _isPrepare = !0);
@@ -1243,7 +1243,7 @@ this.PIXI = this.PIXI || {}, function(exports, _PIXI) {
                 _isInit = !0, PIXI.animate);
             }, animate.loadAssetAsync = function(targets) {
                 if (!_isInit) {
-                    throw new Error('[PIXI-animate-container] Please execute "PIXI.animate.init" first.');
+                    throw new Error('[pixi-animate-container] Please execute "PIXI.animate.init" first.');
                 }
                 Array.isArray(targets) || (targets = [ targets ]);
                 for (var promises = [], i = 0; i < targets.length; i++) {
