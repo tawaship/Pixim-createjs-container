@@ -1,6 +1,6 @@
 {
-  "name": "Pixim-animate-container",
-  "version": "3.0.0",
+  "name": "pixi-animate-container",
+  "version": "3.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -19,14 +19,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tawaship/Pixim-createjs-container.git"
+    "url": "git+https://github.com/tawaship/pixi-animate-container.git"
   },
   "author": "tawaship",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tawaship/Pixim-createjs-container/issues"
+    "url": "https://github.com/tawaship/pixi-animate-container/issues"
   },
-  "homepage": "https://tawaship.github.io/Pixim-createjs-container/",
+  "homepage": "https://tawaship.github.io/pixi-animate-container/",
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^11.0.2",

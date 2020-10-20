@@ -11,7 +11,7 @@ namespace Pixim {
 		 */
 		export interface ICreatejsData {
 			id: number,
-			targets: { [id: number]: CreatejsMovieClip},
+			targets: { [id: number]: CreatejsMovieClip },
 			ticker?: Ticker
 		}
 		

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Pixim-animate-container - v3.0.0</title>
-	<meta name="description" content="Documentation for Pixim-animate-container - v3.0.0">
+	<title>Pixim-animate-container - v3.0.1</title>
+	<meta name="description" content="Documentation for Pixim-animate-container - v3.0.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Pixim-animate-container - v3.0.0</a>
+					<a href="index.html" class="title">Pixim-animate-container - v3.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>Pixim-animate-container - v3.0.0</h1>
+			<h1>Pixim-animate-container - v3.0.1</h1>
 		</div>
 	</div>
 </header>
@@ -64,23 +64,22 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#pixim-animate-container" id="pixim-animate-container" style="color: inherit; text-decoration: none;">
-					<h1>Pixim-animate-container</h1>
+				<a href="#pixi-animate-container" id="pixi-animate-container" style="color: inherit; text-decoration: none;">
+					<h1>pixi-animate-container</h1>
 				</a>
-				<p>&quot;Pixim-animate-container&quot; is a plugin for using content published by Adobe Animate with &quot;<a href="https://github.com/tawaship/Pixim.js">Pixim.js</a>&quot;.</p>
+				<p>&quot;pixi-animate-container&quot; is a plugin for using content published by Adobe Animate with &quot;<a href="https://github.com/pixijs/pixi.js">pixi.js</a>&quot;.</p>
 				<p><a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
 				<hr>
 				<a href="#core-module" id="core-module" style="color: inherit; text-decoration: none;">
 					<h2>Core module</h2>
 				</a>
 				<p><a href="https://tawaship.github.io/pixi-animate-core/">@tawaship/pixi-animate-core</a></p>
-				<a href="#support-version" id="support-version" style="color: inherit; text-decoration: none;">
-					<h2>Support version</h2>
+				<a href="#supported-version" id="supported-version" style="color: inherit; text-decoration: none;">
+					<h2>Supported version</h2>
 				</a>
 				<ul>
 					<li>A complete set of content published with Adobe Animate version 20.02 | 20.5.1</li>
 					<li>pixi.js 5.3.2</li>
-					<li>Pixim.js 1.7.x | 1.8.x</li>
 				</ul>
 				<p>I have not confirmed the operation on other versions.</p>
 				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
@@ -93,29 +92,25 @@
 				<br>
 				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://code.createjs.com/1.0.0/createjs.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/path/to/lib/pixi.5.3.2.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/path/to/lib/Pixim.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/path/to/dist/Pixim-animate-container.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/path/to/dist/pixi-animate-container.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;[your content]&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 				<ol start="2">
 					<li>Use</li>
 				</ol>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Pixim.Application(
-    {
-        <span class="hljs-attr">antialias</span>: <span class="hljs-literal">true</span>
-    }, <span class="hljs-comment">// Options of PIXI.Application.</span>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> PIXI.Application(
     {
         <span class="hljs-attr">autoAdjust</span>: <span class="hljs-literal">true</span>
     } <span class="hljs-comment">// Options of Pixim.Application</span>
 );
 
-Pixim.animate.init({
+PIXI.animate.init({
     <span class="hljs-attr">useSynchedTimeline</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">useDeltaTime</span>: <span class="hljs-literal">false</span>,
     <span class="hljs-attr">useMotionGuide</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-attr">ticker</span>: app.app.ticker
+    <span class="hljs-attr">ticker</span>: app.ticker
 });
 
-Pixim.animate.loadAssetAsync([{
+PIXI.animate.loadAssetAsync([{
     <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;[conposition id]&quot;</span>, <span class="hljs-comment">// &quot;lib.properties.id&quot; in Animate content.</span>
     <span class="hljs-attr">basepath</span>: <span class="hljs-string">&quot;[content directory path]&quot;</span>, <span class="hljs-comment">// Directory path of Animate content.</span>
     <span class="hljs-attr">options</span>: {
@@ -123,34 +118,16 @@ Pixim.animate.loadAssetAsync([{
     }
 }]).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">lib</span>) </span>{
     <span class="hljs-comment">// If you load multiple contents, the argument &quot;lib&quot; will be an array and the &quot;lib&quot; of each content will be stored in order.</span>
-    <span class="hljs-keyword">const</span> Game = Pixim.Content.create();
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Root</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PIXI</span>.<span class="hljs-title">animate</span>.<span class="hljs-title">Container</span> </span>{
+        <span class="hljs-keyword">constructor</span>() {
+            <span class="hljs-built_in">super</span>();
 
-    Game.setConfig({
-        <span class="hljs-attr">width</span>: <span class="hljs-number">450</span>,
-        <span class="hljs-attr">height</span>: <span class="hljs-number">800</span>
-    });
-
-    Game.defineLibraries({
-        <span class="hljs-attr">root</span>: <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Root</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pixim</span>.<span class="hljs-title">animate</span>.<span class="hljs-title">Container</span> </span>{
-            <span class="hljs-keyword">constructor</span>($) {
-                <span class="hljs-built_in">super</span>();
-
-                <span class="hljs-built_in">this</span>.addCreatejs(<span class="hljs-keyword">new</span> lib.game()); <span class="hljs-comment">// The class you want to use.</span>
-            }
+            <span class="hljs-built_in">this</span>.addCreatejs(<span class="hljs-keyword">new</span> lib.game()); <span class="hljs-comment">// The class you want to use.</span>
         }
-    });
+    }
 
-    <span class="hljs-keyword">const</span> game = <span class="hljs-keyword">new</span> Game();
-    game.addVars({
-        <span class="hljs-attr">lib</span>: lib
-    });
-
-    app
-        .fullScreen()
-        .attachAsync(game)
-        .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-            app.play();
-        });
+    app.stage.addChild(<span class="hljs-keyword">new</span> Root());
+    <span class="hljs-built_in">document</span>.body.appendChild(app.view);
 });</code></pre>
 				<a href="#change-log" id="change-log" style="color: inherit; text-decoration: none;">
 					<h2>Change log</h2>
@@ -177,9 +154,9 @@ Pixim.animate.loadAssetAsync([{
 					<h3>3.0.0</h3>
 				</a>
 				<ul>
-					<li>[remove] Pixim.animate.Application</li>
-					<li>[add] <a href="https://tawaship.github.io/Pixim-animate-container/docs/pixim/modules/pixim.animate.html#init">Pixim.animate.init</a></li>
-					<li>[add] <a href="https://tawaship.github.io/Pixim-animate-container/docs/pixim/modules/pixim.animate.html#loadassetasync">Pixim.animate.loadAssetAsync</a></li>
+					<li>[remove] PIXI.animate.Application</li>
+					<li>[add] <a href="https://tawaship.github.io/Pixim-animate-container/docs/pixi/modules/pixi.animate.html#init">PIXI.animate.init</a></li>
+					<li>[add] <a href="https://tawaship.github.io/Pixim-animate-container/docs/pixi/modules/pixi.animate.html#loadassetasync">PIXI.animate.loadAssetAsync</a></li>
 				</ul>
 				<a href="#links" id="links" style="color: inherit; text-decoration: none;">
 					<h2>Links</h2>
