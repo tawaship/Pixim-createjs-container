@@ -13,7 +13,7 @@
 
 - A complete set of content published with Adobe Animate version 20.02 | 20.5.1
 - pixi.js 5.3.2
-- Pixim.js 1.7.x | 1.8.x
+- Pixim.js 1.7.x | 1.8.x | 1.9.x
 
 I have not confirmed the operation on other versions.
 
@@ -22,7 +22,7 @@ I have not confirmed the operation on other versions.
 1. Install
 
 ```sh
-git clone https://github.com/tawaship/Pixim-animate-container
+git clone https://github.com/tawaship/pixi-animate-container
 ```
 
 <br>
@@ -98,20 +98,21 @@ Pixim.animate.loadAssetAsync([{
 ### 1.0.0
 
 - Overrides
-|name|class|
-|:--|:--|
-|createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)|
+
+	|name|class|
+	|:--|:--|
+	|createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/pixi-animate-container/docs/pixim/classes/createjsmovieclip.html)|
 
 ### 3.0.0
 
 - [remove] Pixim.animate.Application
-- [add] [Pixim.animate.init](https://tawaship.github.io/Pixim-animate-container/docs/pixim/modules/pixim.animate.html#init)
-- [add] [Pixim.animate.loadAssetAsync](https://tawaship.github.io/Pixim-animate-container/docs/pixim/modules/pixim.animate.html#loadassetasync)
+- [add] [Pixim.animate.init](https://tawaship.github.io/pixi-animate-container/docs/pixim/modules/pixim.animate.html#init)
+- [add] [Pixim.animate.loadAssetAsync](https://tawaship.github.io/pixi-animate-container/docs/pixim/modules/pixim.animate.html#loadassetasync)
 
 ## Links
 
-[github](https://github.com/tawaship/Pixim-animate-container)
+[github](https://github.com/tawaship/pixi-animate-container)
 
-[documents](https://tawaship.github.io/Pixim-animate-container/docs/)
+[documents](https://tawaship.github.io/pixi-animate-container/docs/)
 
-[samples](https://tawaship.github.io/Pixim-animate-container/samples/)
+[samples](https://tawaship.github.io/pixi-animate-container/samples/)

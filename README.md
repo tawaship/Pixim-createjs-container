@@ -21,7 +21,7 @@ I have not confirmed the operation on other versions.
 1. Install
 
 ```sh
-git clone https://github.com/tawaship/Pixim-animate-container
+git clone https://github.com/tawaship/pixi-animate-container
 ```
 
 <br>
@@ -75,20 +75,21 @@ PIXI.animate.loadAssetAsync([{
 ### 1.0.0
 
 - Overrides
-|name|class|
-|:--|:--|
-|createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/Pixim-animate-container/docs/pixim/classes/createjsmovieclip.html)|
+
+	|name|class|
+	|:--|:--|
+	|createjs.MovieClip|[CreatejsMovieClip](https://tawaship.github.io/pixi-animate-container/docs/pixim/classes/createjsmovieclip.html)|
 
 ### 3.0.0
 
 - [remove] PIXI.animate.Application
-- [add] [PIXI.animate.init](https://tawaship.github.io/Pixim-animate-container/docs/pixi/modules/pixi.animate.html#init)
-- [add] [PIXI.animate.loadAssetAsync](https://tawaship.github.io/Pixim-animate-container/docs/pixi/modules/pixi.animate.html#loadassetasync)
+- [add] [PIXI.animate.init](https://tawaship.github.io/pixi-animate-container/docs/pixi/modules/pixi.animate.html#init)
+- [add] [PIXI.animate.loadAssetAsync](https://tawaship.github.io/pixi-animate-container/docs/pixi/modules/pixi.animate.html#loadassetasync)
 
 ## Links
 
-[github](https://github.com/tawaship/Pixim-animate-container)
+[github](https://github.com/tawaship/pixi-animate-container)
 
-[documents](https://tawaship.github.io/Pixim-animate-container/docs/)
+[documents](https://tawaship.github.io/pixi-animate-container/docs/)
 
-[samples](https://tawaship.github.io/Pixim-animate-container/samples/)
+[samples](https://tawaship.github.io/pixi-animate-container/samples/)
