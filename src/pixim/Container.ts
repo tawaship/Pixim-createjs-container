@@ -6,17 +6,18 @@ import { ITickOption, tickOption } from './TickOption';
 
 namespace Pixim {
 	export namespace animate {
-		/**
-		 * @since 3.0.0
-		 */
+		export interface ICreatejsMovieClipDictionary {
+			[id: number]: CreatejsMovieClip;
+		}
+		
 		export interface ICreatejsData {
-			id: number,
-			targets: { [id: number]: CreatejsMovieClip },
-			ticker?: Ticker
+			id: number;
+			targets: ICreatejsMovieClipDictionary;
+			ticker?: Ticker;
 		}
 		
 		/**
-		 * @see https://tawaship.github.io/Pixim.js/classes/pixim.container.html
+		 * [[https://tawaship.github.io/Pixim.js/classes/pixim.container.html | Pixim.Container]]
 		 */
 		export class Container extends _Pixim.Container {
 			private _createjsData: ICreatejsData;
@@ -29,7 +30,7 @@ namespace Pixim {
 				
 				this._createjsData = {
 					id: 0,
-					targets: [],
+					targets: {},
 					ticker
 				};
 				
@@ -50,9 +51,6 @@ namespace Pixim {
 				}
 			}
 			
-			/**
-			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
-			 */
 			private _addCreatejs(cjs: TCreatejsObject) {
 				if (cjs instanceof CreatejsMovieClip) {
 					const p = cjs.pixi.parent;
@@ -73,7 +71,7 @@ namespace Pixim {
 			}
 			
 			/**
-			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 * [[https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject | PixiAnimateCore.TCreatejsObject]]
 			 */
 			addCreatejs(cjs: TCreatejsObject) {
 				this._addCreatejs(cjs);
@@ -83,7 +81,7 @@ namespace Pixim {
 			}
 			
 			/**
-			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 * [[https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject | PixiAnimateCore.TCreatejsObject]]
 			 */
 			addCreatejsAt(cjs: TCreatejsObject, index: number) {
 				this._addCreatejs(cjs);
@@ -93,7 +91,7 @@ namespace Pixim {
 			}
 			
 			/**
-			 * @see https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject
+			 * [[https://tawaship.github.io/pixi-animate-core/globals.html#tcreatejsobject | PixiAnimateCore.TCreatejsObject]]
 			 */
 			removeCreatejs(cjs: TCreatejsObject) {
 				this.removeChild(cjs.pixi);

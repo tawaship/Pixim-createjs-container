@@ -1,15 +1,15 @@
 /*!
- * Pixim-animate-container - v3.0.1
+ * Pixim-animate-container - v3.1.0
  * 
  * @require pixi.js v5.3.2
- * @require @tawaship/pixim.js v1.8.0
+ * @require @tawaship/pixim.js v1.9.1
  * @author tawaship (makazu.mori@gmail.com)
  * @license MIT
  */
 this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
     "use strict";
     /*!
-     * @tawaship/pixi-animate-core - v2.0.3
+     * @tawaship/pixi-animate-core - v2.1.1
      * 
      * @require pixi.js v5.3.2
      * @author tawaship (makazu.mori@gmail.com)
@@ -1229,7 +1229,7 @@ this.Pixim = this.Pixim || {}, function(exports, pixi_js, _Pixim) {
                     var this$1 = this;
                     superclass.call(this), this._createjsData = {
                         id: 0,
-                        targets: [],
+                        targets: {},
                         ticker: ticker
                     }, this.on("added", (function() {
                         this$1._createjsData.ticker = this$1._createjsData.ticker || tickOption.ticker, 

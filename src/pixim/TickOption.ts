@@ -2,16 +2,11 @@ import { Ticker } from 'pixi.js';
 
 namespace Pixim {
 	export namespace animate {
-		/**
-		 * @since 3.0.0
-		 * @private
-		 */
 		export interface ITickOption {
 			/**
 			 * Ticker that synchronizes the processing of createjs.
 			 * 
-			 * @see http://pixijs.download/v5.3.2/docs/PIXI.Ticker_.html
-			 * @since 3.0.0
+			 * [[http://pixijs.download/v5.3.2/docs/PIXI.Ticker_.html | PIXI.Ticker]]
 			 */
 			ticker?: Ticker,
 			
