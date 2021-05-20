@@ -17,7 +17,7 @@ namespace Pixim {
 		}
 		
 		/**
-		 * [[https://tawaship.github.io/Pixim.js/classes/pixim.container.html | Pixim.Container]]
+		 * [[https://tawaship.github.io/Pixim.js/classes/modules_container.container.html | Pixim.Container]]
 		 */
 		export class Container extends _Pixim.Container {
 			private _createjsData: ICreatejsData;
